@@ -1,64 +1,674 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Andreas CV</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Brent Companion - Job Application Quality Checker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #2b2b2b;
+            color: #f0f0f0;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .pixel-border {
+            border: 4px solid #8b8b8b;
+            border-radius: 0;
+            box-shadow:
+                0 0 0 2px #2b2b2b,
+                0 0 0 4px #f0f0f0,
+                8px 8px 0 0 rgba(0,0,0,0.3);
+        }
+
+        .welcome-screen {
+            text-align: center;
+            padding: 40px;
+            background: #4a4a4a;
+        }
+
+        .welcome-screen h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-shadow: 3px 3px 0 #000;
+        }
+
+        .welcome-screen p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .brent-pixel-art {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            background: linear-gradient(to bottom,
+                #f4c2a5 0%, #f4c2a5 30%,
+                #ffffff 30%, #ffffff 40%,
+                #333333 40%, #333333 70%,
+                #666666 70%, #666666 100%
+            );
+            position: relative;
+            border: 3px solid #000;
+        }
+
+        .brent-pixel-art::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 25%;
+            width: 50%;
+            height: 15%;
+            background: #8b4513;
+        }
+
+        .brent-pixel-art::after {
+            content: '😐';
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+        }
+
+        button {
+            background: #ffd700;
+            border: 3px solid #000;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            transition: all 0.1s;
+            margin: 10px;
+        }
+
+        button:hover {
+            background: #ffed4e;
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0 #000;
+        }
+
+        button:active {
+            transform: translate(0, 0);
+            box-shadow: 2px 2px 0 #000;
+        }
+
+        .main-app {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .sidebar {
+            background: #3a3a3a;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .text-input-area {
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            background: #2b2b2b;
+            border: 2px solid #8b8b8b;
+            color: #f0f0f0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            resize: vertical;
+        }
+
+        .evaluation-item {
+            background: #4a4a4a;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #8b8b8b;
+        }
+
+        .evaluation-item.active {
+            border-left-color: #ffd700;
+            background: #5a5a5a;
+        }
+
+        .evaluation-item.completed {
+            border-left-color: #4ade80;
+        }
+
+        .evaluation-item h3 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #f0f0f0;
+        }
+
+        .slider-container {
+            margin: 15px 0;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            background: #2b2b2b;
+            outline: none;
+            border: 2px solid #8b8b8b;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #ffd700;
+            cursor: pointer;
+            border: 2px solid #000;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #ffd700;
+            cursor: pointer;
+            border: 2px solid #000;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin-top: 5px;
+        }
+
+        .main-content {
+            background: #3a3a3a;
+            padding: 30px;
+            min-height: 500px;
+        }
+
+        .brent-dialogue {
+            background: #4a4a4a;
+            padding: 25px;
+            margin-top: 20px;
+            border-left: 5px solid #ffd700;
+        }
+
+        .brent-dialogue h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .brent-dialogue p {
+            line-height: 1.7;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+
+        .character-name {
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .summary-screen {
+            text-align: center;
+        }
+
+        .summary-screen h2 {
+            color: #ffd700;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .scores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .score-card {
+            background: #4a4a4a;
+            padding: 20px;
+            border: 3px solid #8b8b8b;
+        }
+
+        .score-card h4 {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: #f0f0f0;
+        }
+
+        .score-card .score {
+            font-size: 2rem;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .instruction-text {
+            background: #4a4a4a;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ffd700;
+        }
+
+        @media (max-width: 968px) {
+            .main-app {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <table cellspacing="15">
-    <tr>
-      <td><img src="Profilbillede.png" alt="Profile picture"></td>
-      <td><h1>Andreas Thomsen</h1>
-        <p>Customer Advisor <em><i><strong>at Nuuday</strong></i></em></p>
-        <p>Always fresh, just like ginger</p>
-      </td>
-    </tr>
-  </table>
-<hr>
-  <h3>Work Experience</h3>
-  <ul>
-    <li><a href="https:/www.nuuday.dk/">Nuuday</a></li>
-    <li><a href="https:/www.baisikeli.com">Baisikeli</a></li>
-  </ul>
-  <table cellspacing="15">
-    <thead>
-      <tr>
-        <th>Dates</th>
-        <th>Work</th>
-      </tr>
-    </thead>
-    <tr>
-      <td>2019</td>
-      <td>Customer Advisor</td>
-    </tr>
-    <tr>
-      <td>2018-2019</td>
-      <td>Logistics Assistant and Customer Manager</td>
-    </tr>
-  </table>
-<hr>
-  <h3>Skills</h3>
-      <table cellspacing="15">
-        <tr>
-          <td>Copywriting</td>
-          <td>⭐⭐⭐⭐⭐</td>
-        </tr>
-        <tr>
-          <td>Sales</td>
-          <td>⭐⭐⭐</td>
-        </tr>
-        <tr>
-          <td>Photography</td>
-          <td>⭐⭐⭐</td>
-        </tr>
-      </table>
+    <div id="root"></div>
 
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-  <hr>
-  <a href="hobbies.html">Hobbies</a>
-  <a href="Contact Me.html">Contact me</a>
+    <script type="text/babel">
+        const { useState } = React;
+
+        // David Brent dialogue database
+        const BRENT_DIALOGUE = {
+            motivation: {
+                low: [
+                    "Right, so... motivation. Look, saying you're 'passionate' is like me saying I'm a brilliant guitarist - everyone says it, doesn't make it true. You need to tell them what SPECIFICALLY gets you excited about THEIR work. What problems would you actually enjoy solving for them? Not just 'I'm well motivated.' That's like saying 'I have a personality.' Prove it.",
+                    "Motivation, yeah. Thing is, you can't just say you're motivated and expect them to believe you - that's like me walking into a room and announcing 'I'm funny' before I've even told a joke. You need to explain what specifically interests you about what THEY do. What aspect of their work makes you think 'yeah, I want to get stuck into that'? Be specific, not generic.",
+                    "Alright, motivation. Here's the thing - and I learned this from management training - generic motivation is like cheap cologne, everyone can smell it's not the real thing. 63% of employers say being clear about your motivation is THE most important advice. Tell them exactly what about their role excites you. What would you be doing day-to-day that makes you think 'yes, that's the kind of problem I want to solve'?"
+                ],
+                medium: [
+                    "You're getting there with the motivation, but it's a bit like my guitar solos - technically present but lacking that certain... specificity. You've mentioned you're interested, but drill down. What EXACTLY about their work gets you going? They want to know you've thought about what you'd actually be doing for them, not just that you want A job.",
+                    "Not bad, not bad. You've got some motivation in there, but it's still a bit generic, yeah? It's like when I tell people I'm into music - okay, but what kind? Same here. What specifically about THEIR problems interests you? What would you be working on that makes you think 'I could really get into that'? Make it more concrete.",
+                    "Decent start on motivation, but remember - 68% of employers say good motivation can outweigh missing experience. That's massive. So don't waste it on vague statements. You've shown some interest, now make it razor-sharp specific. What exactly about their work environment, their challenges, their mission actually appeals to you?"
+                ],
+                high: [
+                    "Now THAT'S what I'm talking about! Specific motivation - you've told them exactly what interests you about THEIR work. That's like me explaining why I love The Office environment - the people, the banter, the management opportunities. You've done the research, you know what they do, and you've explained what about it appeals to you. Keep that energy.",
+                    "Brilliant. You've nailed the specificity. You're not just saying you're motivated, you're showing them you understand their work and explaining what specifically draws you to it. That's the difference between saying 'I like people' and 'I like people who appreciate my unique management style and sophisticated sense of humor.' One's generic, one's... well, one's specific.",
+                    "Top marks. You've got specific motivation here - you know what they do, you know what problems you'd be solving, and you've explained why that appeals to you. 75% of employers actively look for well-described personal motivation. You've given them exactly that. This is the good stuff."
+                ]
+            },
+            matching: {
+                low: [
+                    "Job ad matching, right. This is crucial. The recruiter needs to instantly see how you meet their requirements - and I mean INSTANTLY, like when people see me they instantly know 'there's a manager.' But you haven't addressed their specific criteria. Go through their job ad, find their need-to-have requirements, and directly explain how you meet each one. Don't make them hunt for it.",
+                    "Here's the thing with job ads - they're not just suggestions, they're a shopping list. And you haven't shown them you've got the items on their list. It's like if someone asked for a team player with leadership skills and I just talked about my guitar playing - irrelevant, innit? Match your experience to their specific requirements. Make it obvious.",
+                    "Matching the job ad. This is basic stuff, but people miss it all the time - it's like people who miss my jokes, doesn't mean the jokes aren't there. You need to directly address their criteria from the job ad. They said they need X, Y, and Z - show them you have X, Y, and Z. Don't make them guess."
+                ],
+                medium: [
+                    "You've made some connections to the job ad, but it's not quite clear enough. The recruiter should be able to scan your application and tick off their requirements - boom, boom, boom. Like a checklist. You're halfway there, but make it even more explicit. If they ask for 'project management experience,' use those exact words when describing what you've done.",
+                    "Decent job ad matching, but you could be more direct about it. It's like when I reference my management qualifications - I don't hint at them, I state them clearly. If the job ad mentions specific skills or experience they need, mirror that language in your application. Make the connection impossible to miss.",
+                    "You're on the right track with matching the job requirements, but tighten it up. They're spending 2 minutes 18 seconds reading your application - that's it. Make it brain-dead simple for them to see 'yes, this person has what we asked for.' More explicit connections to their stated requirements."
+                ],
+                high: [
+                    "Excellent. You've clearly read their job ad and directly addressed their requirements. The recruiter can instantly see the match - you've got what they're looking for and you've made it obvious. That's efficient, professional, and exactly what they want to see. It's like when I walk into a room and people immediately know 'there's someone who knows what he's doing.'",
+                    "Perfect job ad matching. You've taken their requirements and shown exactly how you meet them. No ambiguity, no making them guess. This is what separates the professionals from the amateurs - you've done the work of making THEIR job easier. They can see immediately that you fit what they're looking for.",
+                    "Spot on. You've addressed their specific criteria from the job ad clearly and directly. This is exactly what they want - they put effort into writing those requirements, and you've shown them you actually read it and have what they need. That's respect for the process, that is."
+                ]
+            },
+            value: {
+                low: [
+                    "Employer value. Big problem here - you're talking about what YOU get from the job, not what THEY get from hiring you. It's like me going on about what I gain from being manager instead of what I bring to the team - which is leadership, vision, and an award-winning sense of humor, by the way. Flip your perspective. What's in it for THEM?",
+                    "Right, so you're focused on your own benefits here - what you'll learn, what you'll gain, your development. That's like me talking about what Wernham Hogg does for my career instead of what I do for Wernham Hogg. Wrong way round. They want to know what value you bring to THEIR organization. What will improve because they hired you?",
+                    "Value proposition is all wrong here. You're in 'what I want' mode when you should be in 'what I offer' mode. Put yourself in their shoes - they're not hiring you as a favor, they're hiring you to solve their problems. What problems will you solve? What will you achieve for them? That's what they care about."
+                ],
+                medium: [
+                    "You've got some employer value in there, but it's mixed up with your own benefits. It's like when I talk about team achievements - I make sure they know what the team gets from my leadership, not just what I get from leading. Separate out the 'what you bring' from the 'what you want' and focus entirely on the former.",
+                    "Getting better. You've mentioned some value you'd bring, but you're still slipping into 'this would be great for my development' territory. They don't care about your development - well, they do, but not in your application. They care about results you'll deliver for them. Keep the focus external, on their gains.",
+                    "You're heading in the right direction with employer value, but tighten your focus. Every sentence should answer 'what does the employer get from this?' not 'what do I get from this?' You've got some good value propositions, just eliminate any statements about your own benefits."
+                ],
+                high: [
+                    "Now that's proper employer value. You've explained what THEY get from hiring you - the results you'll deliver, the problems you'll solve, the value you'll add to their organization. That's the right perspective. It's like when I explain what the team gets from my management - focus on their benefits, not mine. Well done.",
+                    "Excellent employer focus. You've put yourself in their shoes and explained exactly what they gain. This is mature, professional application writing - you understand they're not hiring you to do you a favor, they're hiring you to achieve things for them. You've made it clear what those things are.",
+                    "Brilliant. Completely employer-focused. You've explained what value you bring, what results you'll deliver, what will improve because they hired you. This is what separates good applications from mediocre ones - you understand it's not about you, it's about what you do for them. Keep this perspective."
+                ]
+            },
+            results: {
+                low: [
+                    "Concrete results. Where are they? You've talked about what you did, but not what actually happened because you did it. It's like me saying 'I managed the team' without mentioning that productivity increased, morale improved, and several people told me I was the best boss they'd ever had. Use the STAR method - Situation, Task, Action, and most importantly, RESULT. With numbers.",
+                    "Results, yeah. You need measurable outcomes here. 'I worked on a project' - okay, and? What was the result? Did revenue increase? Did efficiency improve? By how much? It's like me saying 'I entertained the office' - that's nice, but the result was improved team cohesion and a 15% reduction in sick days because people actually wanted to come to work. See the difference?",
+                    "Where are your results? You've described actions but not outcomes. Employers want to know what actually changed because of what you did. Give them numbers - percentages, amounts, timeframes. 'Increased sales by 23%' not 'helped with sales.' 'Reduced processing time from 3 days to 4 hours' not 'improved efficiency.' Be specific."
+                ],
+                medium: [
+                    "You've got some results in there, which is good, but they could be more concrete. 'Improved efficiency' - by how much? Over what timeframe? Give them the full STAR method - Situation, Task, Action, and then a proper measurable Result. Numbers make it real. Like when I say I reduced complaints by 50% - that's a real, verifiable achievement.",
+                    "Decent results, but you can make them stronger with more specificity. You've mentioned outcomes, but add the numbers that prove the impact. Instead of 'successful project,' say 'delivered project 2 weeks early, under budget by 15%, resulting in client contract renewal.' That level of concrete detail.",
+                    "You're on the right track with results, but quantify them more. Every achievement should have a measurable element - time saved, money earned, percentage improved, number of people impacted. That's what makes it credible and impressive. You've got results, now make them concrete."
+                ],
+                high: [
+                    "Excellent results. You've given them the full STAR method with concrete, measurable outcomes. They can see exactly what you achieved, with numbers to back it up. That's credible, that's impressive, that's what they want to see. It's like when I cite specific team achievements - the data proves it's not just talk.",
+                    "Perfect. Concrete, measurable results with the full context. You've explained the situation, what you did, and most importantly, what actually happened as a result - with numbers. This is professional, credible application writing. These results tell a story about what you can deliver for them.",
+                    "Spot on with the results. You've used the STAR method properly - specific situation, clear actions, and measurable outcomes. This gives them confidence that you can actually deliver value, because you've proven you've done it before. These are the kind of results that get you interviews."
+                ]
+            },
+            conciseness: {
+                low: [
+                    "Conciseness. This is too long, innit? You're rambling. 70% of Danish employers want one page maximum, and they're spending 2 minutes 18 seconds reading it. That's it. Every word needs to earn its place. Cut the fluff. It's like one of my motivational speeches - I could go on for hours, but I keep it tight because people's attention spans are... well, they're not what they used to be. Edit ruthlessly.",
+                    "Right, this needs trimming. You've got good information in here, but it's buried in too many words. One page maximum, remember? Every sentence should add value or get cut. It's not about how much you write, it's about how effectively you communicate. I could write a novel about my management philosophy, but I keep it concise because that's what professionals do.",
+                    "Too wordy. You need to cut this down significantly. They're not reading your application for entertainment, they're scanning it for relevant information. Make it easy for them. Remove anything that doesn't directly demonstrate your value for THIS specific role. It's like my email style - brief, clear, effective. Well, usually."
+                ],
+                medium: [
+                    "Getting closer on conciseness, but you can still trim more. Look at each sentence and ask 'does this add value or is it just taking up space?' If it's the latter, cut it. You're working toward one page, every word counts. It's like crafting the perfect joke - economy of language matters. Say what you need to say, then stop.",
+                    "Decent length, but I reckon you could tighten it up another 15-20%. Look for redundancy, remove qualifying phrases like 'I believe' or 'I think' - just state it. Cut adjectives that don't add information. Make every sentence work hard. Remember, they're spending about 2 minutes on this. Make those 2 minutes count.",
+                    "You're in reasonable territory for length, but there's still fat to cut. Read through and eliminate anything that doesn't directly support your application for this role. No generic statements, no fluff, no repetition. One page maximum, and every sentence should make them want to interview you."
+                ],
+                high: [
+                    "Perfect conciseness. You've said what you need to say without waffling, every sentence adds value, and it's headed for that one-page target. This is professional, focused writing. It's like a well-crafted memo - brief, clear, effective. They can scan this quickly and get all the information they need. That's exactly what you want.",
+                    "Excellent. Concise, focused, no fluff. You've included what matters and cut what doesn't. This respects the recruiter's time - they can read this quickly and know whether you're a fit. That's the goal. It's like my management style - efficient, no unnecessary complexity, straight to the point. Well done.",
+                    "Spot on for conciseness. This is tight, focused writing that will fit on one page and deliver all the key information in that 2-minute reading window. You've made their job easier by being clear and brief. That's professional application writing right there."
+                ]
+            }
+        };
+
+        const CRITERIA = [
+            {
+                id: 'motivation',
+                question: 'How specific am I about what interests me in THIS particular role?',
+                shortName: 'Motivation Specificity'
+            },
+            {
+                id: 'matching',
+                question: 'Can the recruiter instantly see how I meet their need-to-have requirements?',
+                shortName: 'Job Ad Matching'
+            },
+            {
+                id: 'value',
+                question: 'Am I explaining what THEY gain, or what I gain?',
+                shortName: 'Employer Value Focus'
+            },
+            {
+                id: 'results',
+                question: 'Did I include measurable results from my actions?',
+                shortName: 'Concrete Results'
+            },
+            {
+                id: 'conciseness',
+                question: 'Is this concise, fluff-free, and contributing to a one-page application?',
+                shortName: 'Conciseness'
+            }
+        ];
+
+        function getScoreRange(score) {
+            if (score <= 3) return 'low';
+            if (score <= 7) return 'medium';
+            return 'high';
+        }
+
+        function getBrentDialogue(criterionId, score) {
+            const range = getScoreRange(score);
+            const dialogues = BRENT_DIALOGUE[criterionId][range];
+            return dialogues[Math.floor(Math.random() * dialogues.length)];
+        }
+
+        function WelcomeScreen({ onStart }) {
+            return (
+                <div className="container">
+                    <div className="welcome-screen pixel-border">
+                        <h1>THE BRENT COMPANION</h1>
+                        <div className="brent-pixel-art"></div>
+                        <p>
+                            Welcome to your personal job application quality checker,
+                            featuring feedback from David Brent himself.
+                        </p>
+                        <p>
+                            Here's how it works: Write your application in Word, paste a section here,
+                            and honestly evaluate it against five key criteria.
+                            Then get feedback that's both hilarious and genuinely helpful.
+                        </p>
+                        <p>
+                            The self-evaluation is the secret - it forces you to think critically
+                            about your writing rather than just accepting whatever comes out.
+                            And David makes it fun enough that you'll actually do it.
+                        </p>
+                        <button onClick={onStart}>
+                            START EVALUATION
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        function EvaluationApp({ onComplete }) {
+            const [pastedText, setPastedText] = useState('');
+            const [currentCriterion, setCurrentCriterion] = useState(null);
+            const [scores, setScores] = useState({});
+            const [currentScore, setCurrentScore] = useState(5);
+            const [showingFeedback, setShowingFeedback] = useState(false);
+            const [currentFeedback, setCurrentFeedback] = useState('');
+
+            const handleTextPaste = () => {
+                if (pastedText.trim()) {
+                    setCurrentCriterion(0);
+                    setCurrentScore(5);
+                }
+            };
+
+            const handleScoreSubmit = () => {
+                const criterion = CRITERIA[currentCriterion];
+                const feedback = getBrentDialogue(criterion.id, currentScore);
+
+                setScores({
+                    ...scores,
+                    [criterion.id]: currentScore
+                });
+
+                setCurrentFeedback(feedback);
+                setShowingFeedback(true);
+            };
+
+            const handleNextCriterion = () => {
+                setShowingFeedback(false);
+                if (currentCriterion < CRITERIA.length - 1) {
+                    setCurrentCriterion(currentCriterion + 1);
+                    setCurrentScore(5);
+                } else {
+                    onComplete(scores);
+                }
+            };
+
+            const isTextEntered = pastedText.trim().length > 0;
+            const isEvaluationComplete = currentCriterion !== null && currentCriterion >= CRITERIA.length;
+
+            return (
+                <div className="container">
+                    <div className="main-app">
+                        <div className="sidebar pixel-border">
+                            <h2>YOUR TEXT</h2>
+                            <div className="text-input-area">
+                                <textarea
+                                    value={pastedText}
+                                    onChange={(e) => setPastedText(e.target.value)}
+                                    placeholder="Paste your application text here (motivation paragraph, STAR example, etc.)..."
+                                    disabled={currentCriterion !== null}
+                                />
+                                {currentCriterion === null && (
+                                    <button
+                                        onClick={handleTextPaste}
+                                        style={{ width: '100%', marginTop: '10px' }}
+                                        disabled={!isTextEntered}
+                                    >
+                                        START EVALUATION
+                                    </button>
+                                )}
+                            </div>
+
+                            <h2>CRITERIA</h2>
+                            {CRITERIA.map((criterion, index) => {
+                                const isActive = currentCriterion === index;
+                                const isCompleted = scores.hasOwnProperty(criterion.id);
+
+                                return (
+                                    <div
+                                        key={criterion.id}
+                                        className={`evaluation-item ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`}
+                                    >
+                                        <h3>{criterion.shortName}</h3>
+                                        {isCompleted && (
+                                            <div className="score-display">
+                                                {scores[criterion.id]}/10
+                                            </div>
+                                        )}
+                                        {isActive && !showingFeedback && (
+                                            <div className="slider-container">
+                                                <input
+                                                    type="range"
+                                                    min="1"
+                                                    max="10"
+                                                    value={currentScore}
+                                                    onChange={(e) => setCurrentScore(parseInt(e.target.value))}
+                                                />
+                                                <div className="score-display">{currentScore}/10</div>
+                                                <button
+                                                    onClick={handleScoreSubmit}
+                                                    style={{ width: '100%', marginTop: '10px' }}
+                                                >
+                                                    SUBMIT
+                                                </button>
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        <div className="main-content pixel-border">
+                            {currentCriterion === null ? (
+                                <div className="instruction-text">
+                                    <h2>Ready to evaluate?</h2>
+                                    <p>Paste your application text in the sidebar and click "START EVALUATION" to begin.</p>
+                                    <p>You'll evaluate your writing against five criteria that matter most to Danish employers, based on research from Ballisager and djøf.</p>
+                                </div>
+                            ) : !showingFeedback ? (
+                                <div className="instruction-text">
+                                    <h2>{CRITERIA[currentCriterion].shortName}</h2>
+                                    <p style={{ fontSize: '1.2rem', marginTop: '20px' }}>
+                                        {CRITERIA[currentCriterion].question}
+                                    </p>
+                                    <p style={{ marginTop: '20px' }}>
+                                        Rate yourself honestly from 1 (not at all) to 10 (absolutely nailed it).
+                                    </p>
+                                </div>
+                            ) : (
+                                <div>
+                                    <div className="brent-dialogue pixel-border">
+                                        <span className="character-name">DAVID BRENT:</span>
+                                        <p>{currentFeedback}</p>
+                                    </div>
+                                    <button
+                                        onClick={handleNextCriterion}
+                                        style={{ marginTop: '20px' }}
+                                    >
+                                        {currentCriterion < CRITERIA.length - 1 ? 'NEXT CRITERION' : 'SEE SUMMARY'}
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function SummaryScreen({ scores, onRestart }) {
+            const averageScore = Object.values(scores).reduce((a, b) => a + b, 0) / Object.values(scores).length;
+
+            let summaryDialogue;
+            if (averageScore <= 4) {
+                summaryDialogue = "Right, so overall... there's work to do, yeah? But that's fine, that's what this is for. You've identified where you need to improve, and now you can actually improve it. That's more self-awareness than most people have - and I include myself in that, I'm very self-aware. Go back to Word, address these issues, and run it through again. You'll get there.";
+            } else if (averageScore <= 7) {
+                summaryDialogue = "Not bad, not bad. You've got a solid foundation here, but there's definitely room for improvement in a few areas. The good news is you know exactly where to focus your revision - you've rated yourself honestly, which is rare. Most people would've given themselves all 10s. Shows maturity. Take this feedback, tighten up those weaker areas, and you'll have a proper strong application.";
+            } else {
+                summaryDialogue = "Now THAT is what I call a quality application. You've nailed the key criteria - specific motivation, clear matching, employer focus, concrete results, and you've kept it concise. That's professional work right there. Of course, you can always polish it further, but you're in strong territory. Send that off with confidence. Well, after you proofread it. Always proofread.";
+            }
+
+            return (
+                <div className="container">
+                    <div className="main-content pixel-border">
+                        <div className="summary-screen">
+                            <h2>EVALUATION COMPLETE</h2>
+
+                            <div className="scores-grid">
+                                {CRITERIA.map(criterion => (
+                                    <div key={criterion.id} className="score-card pixel-border">
+                                        <h4>{criterion.shortName}</h4>
+                                        <div className="score">{scores[criterion.id]}/10</div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="brent-dialogue pixel-border">
+                                <span className="character-name">DAVID BRENT:</span>
+                                <p>{summaryDialogue}</p>
+                            </div>
+
+                            <div style={{ marginTop: '30px' }}>
+                                <button onClick={onRestart}>
+                                    EVALUATE ANOTHER SECTION
+                                </button>
+                            </div>
+
+                            <div className="instruction-text" style={{ marginTop: '30px' }}>
+                                <h3>Next Steps</h3>
+                                <p>Return to Microsoft Word and revise based on the feedback.</p>
+                                <p>Keep this window open for reference, or evaluate another section of your application.</p>
+                                <p>Remember: 70% of Danish employers prefer one-page applications, and they spend an average of 2 minutes 18 seconds reading them. Make every word count.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function App() {
+            const [screen, setScreen] = useState('welcome');
+            const [finalScores, setFinalScores] = useState({});
+
+            const handleStart = () => {
+                setScreen('evaluation');
+            };
+
+            const handleComplete = (scores) => {
+                setFinalScores({ ...scores });
+                setScreen('summary');
+            };
+
+            const handleRestart = () => {
+                setFinalScores({});
+                setScreen('evaluation');
+            };
+
+            return (
+                <>
+                    {screen === 'welcome' && <WelcomeScreen onStart={handleStart} />}
+                    {screen === 'evaluation' && <EvaluationApp onComplete={handleComplete} />}
+                    {screen === 'summary' && <SummaryScreen scores={finalScores} onRestart={handleRestart} />}
+                </>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
 </body>
-
 </html>
