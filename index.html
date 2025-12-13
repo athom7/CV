@@ -281,6 +281,111 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Tim pixel art */
+        .tim-pixel-art {
+            width: 120px;
+            height: 120px;
+            margin: 15px auto;
+            background: linear-gradient(to bottom,
+                #8b4513 0%, #8b4513 20%,
+                #f4c2a5 20%, #f4c2a5 40%,
+                #4169e1 40%, #4169e1 60%,
+                #2c5282 60%, #2c5282 100%
+            );
+            position: relative;
+            border: 2px solid #000;
+        }
+
+        .tim-pixel-art::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 20%;
+            width: 60%;
+            height: 12%;
+            background: #654321;
+        }
+
+        .tim-pixel-art::after {
+            content: '😐';
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+        }
+
+        /* Gareth pixel art */
+        .gareth-pixel-art {
+            width: 120px;
+            height: 120px;
+            margin: 15px auto;
+            background: linear-gradient(to bottom,
+                #d4a574 0%, #d4a574 25%,
+                #f4c2a5 25%, #f4c2a5 45%,
+                #ffffff 45%, #ffffff 60%,
+                #4a5568 60%, #4a5568 100%
+            );
+            position: relative;
+            border: 2px solid #000;
+        }
+
+        .gareth-pixel-art::before {
+            content: '';
+            position: absolute;
+            top: 8%;
+            left: 15%;
+            width: 70%;
+            height: 18%;
+            background: #c9a86a;
+        }
+
+        .gareth-pixel-art::after {
+            content: '😤';
+            position: absolute;
+            top: 28%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+        }
+
+        /* Tim's camera look animation */
+        @keyframes tim-look {
+            0% {
+                transform: scale(1);
+            }
+            10% {
+                transform: scale(1.05) translateZ(0);
+            }
+            90% {
+                transform: scale(1.05) translateZ(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .tim-container {
+            animation: tim-look 2s ease-in-out;
+        }
+
+        .character-dialogue {
+            background: #4a4a4a;
+            padding: 20px;
+            margin-top: 15px;
+            border-left: 5px solid #8b8b8b;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        .character-dialogue.tim {
+            border-left-color: #4169e1;
+        }
+
+        .character-dialogue.gareth {
+            border-left-color: #d4a574;
+        }
     </style>
 </head>
 <body>
@@ -382,6 +487,39 @@
             }
         };
 
+        // Tim's deadpan reality checks (triggers on high self-ratings 8-10)
+        const TIM_DIALOGUE = [
+            "Ten out of ten. Right.",
+            "Yeah, I'm sure the recruiter will be thrilled.",
+            "*looks at camera*",
+            "Good luck with that.",
+            "Bold choice.",
+            "Interesting assessment.",
+            "If you say so.",
+            "That's one way to look at it.",
+            "Yeah... no, that's great. Really great.",
+            "I mean, if you're happy with it.",
+            "Can't argue with confidence.",
+            "Well, you've convinced yourself.",
+            "That's definitely... a score.",
+            "Right. Moving on then.",
+            "Mm-hmm."
+        ];
+
+        // Gareth's enthusiastic misunderstandings (10% random chance)
+        const GARETH_DIALOGUE = [
+            "David's absolutely right! When I wrote my application for Team Leader, I didn't bother with any of that specific stuff either. Still don't know why I didn't get it.",
+            "Yeah! Like David always says, you've got to really sell yourself. I once wrote three pages about my territorial army experience. They said it was 'too much information' but what do they know?",
+            "Exactly what David said! I learned everything I know about applications from him. Well, I've never actually gotten a job from an application, but the principle is sound.",
+            "David's spot on. You need concrete examples. Like when I increased security awareness by 200%—well, I mean, I started locking the stationery cupboard, so technically that's an increase from zero.",
+            "This is why David's the boss and we're not. Well, I could be, I've got the qualifications, but you know... politics.",
+            "Yeah, one page! Keep it short. Although my CV is seven pages because I've done a lot of important things. But for you, yeah, one page.",
+            "David knows what he's talking about. He's managed to keep this job for years. That's... that's an achievement.",
+            "Motivation is key! You've got to want it. I wanted the assistant manager position SO much. Still do. Any day now.",
+            "Right, yeah. Numbers. I've got loads of numbers in my CV. My territorial army serial number, my extension number, the number of complaints I've successfully... well, the number of complaints anyway.",
+            "This is brilliant advice from David. I'm learning so much just listening to this. I should write this down. Do you mind if I use this for my next application?"
+        ];
+
         const CRITERIA = [
             {
                 id: 'motivation',
@@ -457,6 +595,8 @@
             const [currentScore, setCurrentScore] = useState(5);
             const [showingFeedback, setShowingFeedback] = useState(false);
             const [currentFeedback, setCurrentFeedback] = useState('');
+            const [extraCharacter, setExtraCharacter] = useState(null); // 'tim' or 'gareth' or null
+            const [extraDialogue, setExtraDialogue] = useState('');
 
             const handleTextPaste = () => {
                 if (pastedText.trim()) {
@@ -475,11 +615,31 @@
                 });
 
                 setCurrentFeedback(feedback);
+
+                // Determine if extra character appears
+                let character = null;
+                let dialogue = '';
+
+                // Tim appears 20% of the time on high scores (8-10)
+                if (currentScore >= 8 && Math.random() < 0.2) {
+                    character = 'tim';
+                    dialogue = TIM_DIALOGUE[Math.floor(Math.random() * TIM_DIALOGUE.length)];
+                }
+                // Gareth appears 10% of the time (if Tim didn't appear)
+                else if (Math.random() < 0.1) {
+                    character = 'gareth';
+                    dialogue = GARETH_DIALOGUE[Math.floor(Math.random() * GARETH_DIALOGUE.length)];
+                }
+
+                setExtraCharacter(character);
+                setExtraDialogue(dialogue);
                 setShowingFeedback(true);
             };
 
             const handleNextCriterion = () => {
                 setShowingFeedback(false);
+                setExtraCharacter(null);
+                setExtraDialogue('');
                 if (currentCriterion < CRITERIA.length - 1) {
                     setCurrentCriterion(currentCriterion + 1);
                     setCurrentScore(5);
@@ -576,6 +736,25 @@
                                         <span className="character-name">DAVID BRENT:</span>
                                         <p>{currentFeedback}</p>
                                     </div>
+
+                                    {extraCharacter === 'tim' && (
+                                        <div className="tim-container">
+                                            <div className="tim-pixel-art"></div>
+                                            <div className="character-dialogue tim">
+                                                <span className="character-name">TIM:</span> {extraDialogue}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {extraCharacter === 'gareth' && (
+                                        <div>
+                                            <div className="gareth-pixel-art"></div>
+                                            <div className="character-dialogue gareth">
+                                                <span className="character-name">GARETH:</span> {extraDialogue}
+                                            </div>
+                                        </div>
+                                    )}
+
                                     <button
                                         onClick={handleNextCriterion}
                                         style={{ marginTop: '20px' }}
