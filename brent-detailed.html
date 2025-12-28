@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Brent - Detailed Pixel Art</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #f0f0f0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffd700;
+            font-size: 2.5rem;
+            text-shadow: 3px 3px 0 #000;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            color: #aaa;
+        }
+
+        .sprite-display {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .sprite-card {
+            background: #3a3a3a;
+            border: 4px solid #8b8b8b;
+            padding: 30px;
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+            text-align: center;
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .sprite-card h2 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .canvas-container {
+            background: #2b2b2b;
+            padding: 40px;
+            border: 2px solid #5a5a5a;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        canvas {
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .info {
+            background: #2b2b2b;
+            padding: 20px;
+            border-left: 4px solid #ffd700;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .info h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info li {
+            padding: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .info li::before {
+            content: '→ ';
+            color: #ffd700;
+        }
+
+        .details {
+            background: #4a4a4a;
+            border: 3px solid #ffd700;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .details h2 {
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .details p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .color-palette {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .color-swatch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #2b2b2b;
+            padding: 10px;
+            border: 2px solid #5a5a5a;
+        }
+
+        .color-box {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #000;
+        }
+
+        .color-label {
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👔 David Brent - Detailed Sprite</h1>
+        <p class="subtitle">32x32 pixel art with proper shading and detail</p>
+
+        <div class="sprite-display">
+            <div class="sprite-card">
+                <h2>Idle Frame 1</h2>
+                <div class="canvas-container">
+                    <canvas id="brent-frame1" width="32" height="32"></canvas>
+                </div>
+                <p style="color: #aaa; font-size: 0.9rem;">Base idle pose</p>
+            </div>
+
+            <div class="sprite-card">
+                <h2>Idle Frame 2</h2>
+                <div class="canvas-container">
+                    <canvas id="brent-frame2" width="32" height="32"></canvas>
+                </div>
+                <p style="color: #aaa; font-size: 0.9rem;">Slight movement</p>
+            </div>
+
+            <div class="sprite-card">
+                <h2>Animated (8x Scale)</h2>
+                <div class="canvas-container">
+                    <canvas id="brent-animated" width="256" height="256"></canvas>
+                </div>
+                <p style="color: #aaa; font-size: 0.9rem;">Smooth idle animation loop</p>
+            </div>
+        </div>
+
+        <div class="details">
+            <h2>Design Details</h2>
+            <p>
+                This David Brent sprite features detailed pixel art with professional shading techniques:
+            </p>
+            <div class="info">
+                <h3>Character Features:</h3>
+                <ul>
+                    <li>Receding hairline with brown tones and highlights</li>
+                    <li>Facial features with proper skin tone shading</li>
+                    <li>Detailed eyes with pupils and highlights</li>
+                    <li>White collar shirt with shadow detail</li>
+                    <li>Red tie with shading and highlights</li>
+                    <li>Grey suit jacket with depth and creases</li>
+                    <li>Dark trousers with subtle shading</li>
+                    <li>Black shoes with shine highlights</li>
+                </ul>
+            </div>
+
+            <h3 style="color: #ffd700; margin-top: 30px; margin-bottom: 15px;">Color Palette Used:</h3>
+            <div class="color-palette">
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #5a3a1a;"></div>
+                    <span class="color-label">Hair Shadow</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #8b4513;"></div>
+                    <span class="color-label">Hair Base</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #a0694f;"></div>
+                    <span class="color-label">Hair Highlight</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #c68f6f;"></div>
+                    <span class="color-label">Skin Shadow</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #e8b896;"></div>
+                    <span class="color-label">Skin Base</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #f4c2a5;"></div>
+                    <span class="color-label">Skin Highlight</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #d0d0d0;"></div>
+                    <span class="color-label">Shirt Shadow</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #f0f0f0;"></div>
+                    <span class="color-label">Shirt Base</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #ffffff;"></div>
+                    <span class="color-label">Shirt Highlight</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #6b0000;"></div>
+                    <span class="color-label">Tie Shadow</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #8b0000;"></div>
+                    <span class="color-label">Tie Base</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #a00000;"></div>
+                    <span class="color-label">Tie Highlight</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #333333;"></div>
+                    <span class="color-label">Suit Shadow</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #4a4a4a;"></div>
+                    <span class="color-label">Suit Base</span>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #5a5a5a;"></div>
+                    <span class="color-label">Suit Highlight</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Color palette
+        const colors = {
+            // Hair
+            hairShadow: '#5a3a1a',
+            hairBase: '#8b4513',
+            hairHighlight: '#a0694f',
+            // Skin
+            skinShadow: '#c68f6f',
+            skinBase: '#e8b896',
+            skinHighlight: '#f4c2a5',
+            // Eyes
+            eyeWhite: '#ffffff',
+            eyeIris: '#4a3020',
+            eyePupil: '#000000',
+            // Shirt
+            shirtShadow: '#d0d0d0',
+            shirtBase: '#f0f0f0',
+            shirtHighlight: '#ffffff',
+            // Tie
+            tieShadow: '#6b0000',
+            tieBase: '#8b0000',
+            tieHighlight: '#a00000',
+            // Suit
+            suitShadow: '#333333',
+            suitBase: '#4a4a4a',
+            suitHighlight: '#5a5a5a',
+            // Pants
+            pantsShadow: '#1a1a1a',
+            pantsBase: '#2a2a2a',
+            // Shoes
+            shoeShadow: '#000000',
+            shoeBase: '#0a0a0a',
+            shoeHighlight: '#1a1a1a',
+            // Transparent
+            transparent: 'transparent'
+        };
+
+        // Helper function to draw a pixel
+        function drawPixel(ctx, x, y, color) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, 1, 1);
+        }
+
+        // Draw Brent sprite - Frame 1 (Idle base)
+        function drawBrentFrame1(canvas) {
+            const ctx = canvas.getContext('2d');
+            ctx.imageSmoothingEnabled = false;
+            ctx.clearRect(0, 0, 32, 32);
+
+            // Row-by-row pixel drawing
+            // Row 4-6: Hair (receding hairline)
+            drawPixel(ctx, 12, 4, colors.hairShadow);
+            drawPixel(ctx, 13, 4, colors.hairBase);
+            drawPixel(ctx, 14, 4, colors.hairBase);
+            drawPixel(ctx, 15, 4, colors.hairBase);
+            drawPixel(ctx, 16, 4, colors.hairBase);
+            drawPixel(ctx, 17, 4, colors.hairBase);
+            drawPixel(ctx, 18, 4, colors.hairBase);
+            drawPixel(ctx, 19, 4, colors.hairShadow);
+
+            drawPixel(ctx, 11, 5, colors.hairShadow);
+            drawPixel(ctx, 12, 5, colors.hairBase);
+            drawPixel(ctx, 13, 5, colors.hairBase);
+            drawPixel(ctx, 14, 5, colors.hairHighlight);
+            drawPixel(ctx, 15, 5, colors.hairBase);
+            drawPixel(ctx, 16, 5, colors.hairBase);
+            drawPixel(ctx, 17, 5, colors.hairHighlight);
+            drawPixel(ctx, 18, 5, colors.hairBase);
+            drawPixel(ctx, 19, 5, colors.hairBase);
+            drawPixel(ctx, 20, 5, colors.hairShadow);
+
+            // Row 6: Hair continues on sides
+            drawPixel(ctx, 10, 6, colors.hairShadow);
+            drawPixel(ctx, 11, 6, colors.hairBase);
+            drawPixel(ctx, 12, 6, colors.hairBase);
+            drawPixel(ctx, 13, 6, colors.skinShadow);
+            drawPixel(ctx, 14, 6, colors.skinBase);
+            drawPixel(ctx, 15, 6, colors.skinBase);
+            drawPixel(ctx, 16, 6, colors.skinBase);
+            drawPixel(ctx, 17, 6, colors.skinBase);
+            drawPixel(ctx, 18, 6, colors.skinShadow);
+            drawPixel(ctx, 19, 6, colors.hairBase);
+            drawPixel(ctx, 20, 6, colors.hairBase);
+            drawPixel(ctx, 21, 6, colors.hairShadow);
+
+            // Row 7-8: Forehead
+            drawPixel(ctx, 10, 7, colors.hairShadow);
+            drawPixel(ctx, 11, 7, colors.hairBase);
+            drawPixel(ctx, 12, 7, colors.skinShadow);
+            drawPixel(ctx, 13, 7, colors.skinBase);
+            drawPixel(ctx, 14, 7, colors.skinBase);
+            drawPixel(ctx, 15, 7, colors.skinHighlight);
+            drawPixel(ctx, 16, 7, colors.skinHighlight);
+            drawPixel(ctx, 17, 7, colors.skinBase);
+            drawPixel(ctx, 18, 7, colors.skinBase);
+            drawPixel(ctx, 19, 7, colors.skinShadow);
+            drawPixel(ctx, 20, 7, colors.hairBase);
+            drawPixel(ctx, 21, 7, colors.hairShadow);
+
+            drawPixel(ctx, 10, 8, colors.hairShadow);
+            drawPixel(ctx, 11, 8, colors.skinShadow);
+            drawPixel(ctx, 12, 8, colors.skinBase);
+            drawPixel(ctx, 13, 8, colors.skinBase);
+            drawPixel(ctx, 14, 8, colors.skinHighlight);
+            drawPixel(ctx, 15, 8, colors.skinHighlight);
+            drawPixel(ctx, 16, 8, colors.skinHighlight);
+            drawPixel(ctx, 17, 8, colors.skinHighlight);
+            drawPixel(ctx, 18, 8, colors.skinBase);
+            drawPixel(ctx, 19, 8, colors.skinBase);
+            drawPixel(ctx, 20, 8, colors.skinShadow);
+            drawPixel(ctx, 21, 8, colors.hairShadow);
+
+            // Row 9-10: Eyes
+            drawPixel(ctx, 11, 9, colors.skinShadow);
+            drawPixel(ctx, 12, 9, colors.skinBase);
+            drawPixel(ctx, 13, 9, colors.eyeWhite);
+            drawPixel(ctx, 14, 9, colors.eyeWhite);
+            drawPixel(ctx, 15, 9, colors.skinBase);
+            drawPixel(ctx, 16, 9, colors.skinBase);
+            drawPixel(ctx, 17, 9, colors.eyeWhite);
+            drawPixel(ctx, 18, 9, colors.eyeWhite);
+            drawPixel(ctx, 19, 9, colors.skinBase);
+            drawPixel(ctx, 20, 9, colors.skinShadow);
+
+            drawPixel(ctx, 11, 10, colors.skinShadow);
+            drawPixel(ctx, 12, 10, colors.skinBase);
+            drawPixel(ctx, 13, 10, colors.eyeIris);
+            drawPixel(ctx, 14, 10, colors.eyePupil);
+            drawPixel(ctx, 15, 10, colors.skinBase);
+            drawPixel(ctx, 16, 10, colors.skinBase);
+            drawPixel(ctx, 17, 10, colors.eyePupil);
+            drawPixel(ctx, 18, 10, colors.eyeIris);
+            drawPixel(ctx, 19, 10, colors.skinBase);
+            drawPixel(ctx, 20, 10, colors.skinShadow);
+
+            // Row 11-12: Nose and cheeks
+            drawPixel(ctx, 11, 11, colors.skinShadow);
+            drawPixel(ctx, 12, 11, colors.skinBase);
+            drawPixel(ctx, 13, 11, colors.skinBase);
+            drawPixel(ctx, 14, 11, colors.skinBase);
+            drawPixel(ctx, 15, 11, colors.skinShadow);
+            drawPixel(ctx, 16, 11, colors.skinShadow);
+            drawPixel(ctx, 17, 11, colors.skinBase);
+            drawPixel(ctx, 18, 11, colors.skinBase);
+            drawPixel(ctx, 19, 11, colors.skinBase);
+            drawPixel(ctx, 20, 11, colors.skinShadow);
+
+            drawPixel(ctx, 11, 12, colors.skinShadow);
+            drawPixel(ctx, 12, 12, colors.skinBase);
+            drawPixel(ctx, 13, 12, colors.skinBase);
+            drawPixel(ctx, 14, 12, colors.skinBase);
+            drawPixel(ctx, 15, 12, colors.skinBase);
+            drawPixel(ctx, 16, 12, colors.skinBase);
+            drawPixel(ctx, 17, 12, colors.skinBase);
+            drawPixel(ctx, 18, 12, colors.skinBase);
+            drawPixel(ctx, 19, 12, colors.skinBase);
+            drawPixel(ctx, 20, 12, colors.skinShadow);
+
+            // Row 13: Mouth
+            drawPixel(ctx, 11, 13, colors.skinShadow);
+            drawPixel(ctx, 12, 13, colors.skinBase);
+            drawPixel(ctx, 13, 13, colors.skinBase);
+            drawPixel(ctx, 14, 13, colors.skinShadow);
+            drawPixel(ctx, 15, 13, colors.skinShadow);
+            drawPixel(ctx, 16, 13, colors.skinShadow);
+            drawPixel(ctx, 17, 13, colors.skinShadow);
+            drawPixel(ctx, 18, 13, colors.skinBase);
+            drawPixel(ctx, 19, 13, colors.skinBase);
+            drawPixel(ctx, 20, 13, colors.skinShadow);
+
+            // Row 14: Chin
+            drawPixel(ctx, 12, 14, colors.skinShadow);
+            drawPixel(ctx, 13, 14, colors.skinBase);
+            drawPixel(ctx, 14, 14, colors.skinBase);
+            drawPixel(ctx, 15, 14, colors.skinBase);
+            drawPixel(ctx, 16, 14, colors.skinBase);
+            drawPixel(ctx, 17, 14, colors.skinBase);
+            drawPixel(ctx, 18, 14, colors.skinBase);
+            drawPixel(ctx, 19, 14, colors.skinShadow);
+
+            // Row 15: Neck
+            drawPixel(ctx, 13, 15, colors.skinShadow);
+            drawPixel(ctx, 14, 15, colors.skinBase);
+            drawPixel(ctx, 15, 15, colors.skinBase);
+            drawPixel(ctx, 16, 15, colors.skinBase);
+            drawPixel(ctx, 17, 15, colors.skinBase);
+            drawPixel(ctx, 18, 15, colors.skinShadow);
+
+            // Row 16-17: Collar and tie start
+            drawPixel(ctx, 11, 16, colors.shirtShadow);
+            drawPixel(ctx, 12, 16, colors.shirtBase);
+            drawPixel(ctx, 13, 16, colors.shirtBase);
+            drawPixel(ctx, 14, 16, colors.shirtHighlight);
+            drawPixel(ctx, 15, 16, colors.tieShadow);
+            drawPixel(ctx, 16, 16, colors.tieShadow);
+            drawPixel(ctx, 17, 16, colors.shirtHighlight);
+            drawPixel(ctx, 18, 16, colors.shirtBase);
+            drawPixel(ctx, 19, 16, colors.shirtBase);
+            drawPixel(ctx, 20, 16, colors.shirtShadow);
+
+            drawPixel(ctx, 10, 17, colors.shirtShadow);
+            drawPixel(ctx, 11, 17, colors.shirtBase);
+            drawPixel(ctx, 12, 17, colors.shirtBase);
+            drawPixel(ctx, 13, 17, colors.shirtHighlight);
+            drawPixel(ctx, 14, 17, colors.tieShadow);
+            drawPixel(ctx, 15, 17, colors.tieBase);
+            drawPixel(ctx, 16, 17, colors.tieBase);
+            drawPixel(ctx, 17, 17, colors.tieShadow);
+            drawPixel(ctx, 18, 17, colors.shirtHighlight);
+            drawPixel(ctx, 19, 17, colors.shirtBase);
+            drawPixel(ctx, 20, 17, colors.shirtBase);
+            drawPixel(ctx, 21, 17, colors.shirtShadow);
+
+            // Row 18-20: Tie and shirt
+            drawPixel(ctx, 10, 18, colors.suitShadow);
+            drawPixel(ctx, 11, 18, colors.shirtShadow);
+            drawPixel(ctx, 12, 18, colors.shirtBase);
+            drawPixel(ctx, 13, 18, colors.shirtHighlight);
+            drawPixel(ctx, 14, 18, colors.tieShadow);
+            drawPixel(ctx, 15, 18, colors.tieBase);
+            drawPixel(ctx, 16, 18, colors.tieHighlight);
+            drawPixel(ctx, 17, 18, colors.tieBase);
+            drawPixel(ctx, 18, 18, colors.shirtHighlight);
+            drawPixel(ctx, 19, 18, colors.shirtBase);
+            drawPixel(ctx, 20, 18, colors.shirtShadow);
+            drawPixel(ctx, 21, 18, colors.suitShadow);
+
+            drawPixel(ctx, 9, 19, colors.suitShadow);
+            drawPixel(ctx, 10, 19, colors.suitBase);
+            drawPixel(ctx, 11, 19, colors.shirtShadow);
+            drawPixel(ctx, 12, 19, colors.shirtBase);
+            drawPixel(ctx, 13, 19, colors.tieShadow);
+            drawPixel(ctx, 14, 19, colors.tieBase);
+            drawPixel(ctx, 15, 19, colors.tieBase);
+            drawPixel(ctx, 16, 19, colors.tieBase);
+            drawPixel(ctx, 17, 19, colors.tieShadow);
+            drawPixel(ctx, 18, 19, colors.shirtBase);
+            drawPixel(ctx, 19, 19, colors.shirtShadow);
+            drawPixel(ctx, 20, 19, colors.suitBase);
+            drawPixel(ctx, 21, 19, colors.suitShadow);
+
+            drawPixel(ctx, 9, 20, colors.suitShadow);
+            drawPixel(ctx, 10, 20, colors.suitBase);
+            drawPixel(ctx, 11, 20, colors.suitBase);
+            drawPixel(ctx, 12, 20, colors.tieShadow);
+            drawPixel(ctx, 13, 20, colors.tieShadow);
+            drawPixel(ctx, 14, 20, colors.tieBase);
+            drawPixel(ctx, 15, 20, colors.tieBase);
+            drawPixel(ctx, 16, 20, colors.tieBase);
+            drawPixel(ctx, 17, 20, colors.tieShadow);
+            drawPixel(ctx, 18, 20, colors.tieShadow);
+            drawPixel(ctx, 19, 20, colors.suitBase);
+            drawPixel(ctx, 20, 20, colors.suitBase);
+            drawPixel(ctx, 21, 20, colors.suitShadow);
+
+            // Row 21-23: Suit jacket
+            drawPixel(ctx, 8, 21, colors.suitShadow);
+            drawPixel(ctx, 9, 21, colors.suitBase);
+            drawPixel(ctx, 10, 21, colors.suitBase);
+            drawPixel(ctx, 11, 21, colors.suitBase);
+            drawPixel(ctx, 12, 21, colors.suitBase);
+            drawPixel(ctx, 13, 21, colors.tieShadow);
+            drawPixel(ctx, 14, 21, colors.tieBase);
+            drawPixel(ctx, 15, 21, colors.tieBase);
+            drawPixel(ctx, 16, 21, colors.tieBase);
+            drawPixel(ctx, 17, 21, colors.tieShadow);
+            drawPixel(ctx, 18, 21, colors.suitBase);
+            drawPixel(ctx, 19, 21, colors.suitBase);
+            drawPixel(ctx, 20, 21, colors.suitBase);
+            drawPixel(ctx, 21, 21, colors.suitBase);
+            drawPixel(ctx, 22, 21, colors.suitShadow);
+
+            drawPixel(ctx, 7, 22, colors.suitShadow);
+            drawPixel(ctx, 8, 22, colors.suitBase);
+            drawPixel(ctx, 9, 22, colors.suitHighlight);
+            drawPixel(ctx, 10, 22, colors.suitBase);
+            drawPixel(ctx, 11, 22, colors.suitBase);
+            drawPixel(ctx, 12, 22, colors.suitBase);
+            drawPixel(ctx, 13, 22, colors.suitBase);
+            drawPixel(ctx, 14, 22, colors.tieShadow);
+            drawPixel(ctx, 15, 22, colors.tieBase);
+            drawPixel(ctx, 16, 22, colors.tieShadow);
+            drawPixel(ctx, 17, 22, colors.suitBase);
+            drawPixel(ctx, 18, 22, colors.suitBase);
+            drawPixel(ctx, 19, 22, colors.suitBase);
+            drawPixel(ctx, 20, 22, colors.suitBase);
+            drawPixel(ctx, 21, 22, colors.suitHighlight);
+            drawPixel(ctx, 22, 22, colors.suitBase);
+            drawPixel(ctx, 23, 22, colors.suitShadow);
+
+            // Row 23-24: Arms visible
+            drawPixel(ctx, 7, 23, colors.suitShadow);
+            drawPixel(ctx, 8, 23, colors.suitBase);
+            drawPixel(ctx, 9, 23, colors.suitBase);
+            drawPixel(ctx, 10, 23, colors.suitBase);
+            drawPixel(ctx, 11, 23, colors.suitBase);
+            drawPixel(ctx, 12, 23, colors.suitBase);
+            drawPixel(ctx, 13, 23, colors.suitBase);
+            drawPixel(ctx, 14, 23, colors.suitBase);
+            drawPixel(ctx, 15, 23, colors.suitBase);
+            drawPixel(ctx, 16, 23, colors.suitBase);
+            drawPixel(ctx, 17, 23, colors.suitBase);
+            drawPixel(ctx, 18, 23, colors.suitBase);
+            drawPixel(ctx, 19, 23, colors.suitBase);
+            drawPixel(ctx, 20, 23, colors.suitBase);
+            drawPixel(ctx, 21, 23, colors.suitBase);
+            drawPixel(ctx, 22, 23, colors.suitBase);
+            drawPixel(ctx, 23, 23, colors.suitShadow);
+
+            // Row 24-25: Lower body
+            drawPixel(ctx, 6, 24, colors.skinShadow);
+            drawPixel(ctx, 7, 24, colors.skinBase);
+            drawPixel(ctx, 8, 24, colors.suitShadow);
+            drawPixel(ctx, 9, 24, colors.suitBase);
+            drawPixel(ctx, 10, 24, colors.suitBase);
+            drawPixel(ctx, 11, 24, colors.suitBase);
+            drawPixel(ctx, 12, 24, colors.suitBase);
+            drawPixel(ctx, 13, 24, colors.suitBase);
+            drawPixel(ctx, 14, 24, colors.suitBase);
+            drawPixel(ctx, 15, 24, colors.suitBase);
+            drawPixel(ctx, 16, 24, colors.suitBase);
+            drawPixel(ctx, 17, 24, colors.suitBase);
+            drawPixel(ctx, 18, 24, colors.suitBase);
+            drawPixel(ctx, 19, 24, colors.suitBase);
+            drawPixel(ctx, 20, 24, colors.suitBase);
+            drawPixel(ctx, 21, 24, colors.suitBase);
+            drawPixel(ctx, 22, 24, colors.suitShadow);
+            drawPixel(ctx, 23, 24, colors.skinBase);
+            drawPixel(ctx, 24, 24, colors.skinShadow);
+
+            // Row 25-26: Hands and waist
+            drawPixel(ctx, 6, 25, colors.skinShadow);
+            drawPixel(ctx, 7, 25, colors.skinBase);
+            drawPixel(ctx, 8, 25, colors.skinBase);
+            drawPixel(ctx, 9, 25, colors.suitShadow);
+            drawPixel(ctx, 10, 25, colors.pantsShadow);
+            drawPixel(ctx, 11, 25, colors.pantsBase);
+            drawPixel(ctx, 12, 25, colors.pantsBase);
+            drawPixel(ctx, 13, 25, colors.pantsBase);
+            drawPixel(ctx, 14, 25, colors.pantsBase);
+            drawPixel(ctx, 15, 25, colors.pantsShadow);
+            drawPixel(ctx, 16, 25, colors.pantsShadow);
+            drawPixel(ctx, 17, 25, colors.pantsBase);
+            drawPixel(ctx, 18, 25, colors.pantsBase);
+            drawPixel(ctx, 19, 25, colors.pantsBase);
+            drawPixel(ctx, 20, 25, colors.pantsBase);
+            drawPixel(ctx, 21, 25, colors.suitShadow);
+            drawPixel(ctx, 22, 25, colors.skinBase);
+            drawPixel(ctx, 23, 25, colors.skinBase);
+            drawPixel(ctx, 24, 25, colors.skinShadow);
+
+            // Row 26-27: Legs
+            drawPixel(ctx, 11, 26, colors.pantsShadow);
+            drawPixel(ctx, 12, 26, colors.pantsBase);
+            drawPixel(ctx, 13, 26, colors.pantsBase);
+            drawPixel(ctx, 14, 26, colors.pantsBase);
+            drawPixel(ctx, 15, 26, colors.pantsShadow);
+            drawPixel(ctx, 16, 26, colors.pantsShadow);
+            drawPixel(ctx, 17, 26, colors.pantsBase);
+            drawPixel(ctx, 18, 26, colors.pantsBase);
+            drawPixel(ctx, 19, 26, colors.pantsBase);
+            drawPixel(ctx, 20, 26, colors.pantsShadow);
+
+            drawPixel(ctx, 11, 27, colors.pantsShadow);
+            drawPixel(ctx, 12, 27, colors.pantsBase);
+            drawPixel(ctx, 13, 27, colors.pantsBase);
+            drawPixel(ctx, 14, 27, colors.pantsShadow);
+            drawPixel(ctx, 16, 27, colors.pantsShadow);
+            drawPixel(ctx, 17, 27, colors.pantsBase);
+            drawPixel(ctx, 18, 27, colors.pantsBase);
+            drawPixel(ctx, 19, 27, colors.pantsShadow);
+
+            // Row 28-29: Feet
+            drawPixel(ctx, 11, 28, colors.shoeShadow);
+            drawPixel(ctx, 12, 28, colors.shoeBase);
+            drawPixel(ctx, 13, 28, colors.shoeBase);
+            drawPixel(ctx, 14, 28, colors.shoeShadow);
+            drawPixel(ctx, 16, 28, colors.shoeShadow);
+            drawPixel(ctx, 17, 28, colors.shoeBase);
+            drawPixel(ctx, 18, 28, colors.shoeBase);
+            drawPixel(ctx, 19, 28, colors.shoeShadow);
+
+            drawPixel(ctx, 10, 29, colors.shoeShadow);
+            drawPixel(ctx, 11, 29, colors.shoeBase);
+            drawPixel(ctx, 12, 29, colors.shoeHighlight);
+            drawPixel(ctx, 13, 29, colors.shoeBase);
+            drawPixel(ctx, 14, 29, colors.shoeBase);
+            drawPixel(ctx, 15, 29, colors.shoeShadow);
+            drawPixel(ctx, 16, 29, colors.shoeShadow);
+            drawPixel(ctx, 17, 29, colors.shoeBase);
+            drawPixel(ctx, 18, 29, colors.shoeHighlight);
+            drawPixel(ctx, 19, 29, colors.shoeBase);
+            drawPixel(ctx, 20, 29, colors.shoeShadow);
+        }
+
+        // Draw Frame 2 (slightly different for animation - body shifted 1px down)
+        function drawBrentFrame2(canvas) {
+            const ctx = canvas.getContext('2d');
+            ctx.imageSmoothingEnabled = false;
+            ctx.clearRect(0, 0, 32, 32);
+
+            // Similar to frame 1 but shifted down 1 pixel from row 20 onwards
+            // Copy frame 1 code but add 1 to y coordinates for rows 20+
+
+            // Rows 4-19 identical to frame 1
+            // Hair
+            drawPixel(ctx, 12, 4, colors.hairShadow);
+            drawPixel(ctx, 13, 4, colors.hairBase);
+            drawPixel(ctx, 14, 4, colors.hairBase);
+            drawPixel(ctx, 15, 4, colors.hairBase);
+            drawPixel(ctx, 16, 4, colors.hairBase);
+            drawPixel(ctx, 17, 4, colors.hairBase);
+            drawPixel(ctx, 18, 4, colors.hairBase);
+            drawPixel(ctx, 19, 4, colors.hairShadow);
+
+            drawPixel(ctx, 11, 5, colors.hairShadow);
+            drawPixel(ctx, 12, 5, colors.hairBase);
+            drawPixel(ctx, 13, 5, colors.hairBase);
+            drawPixel(ctx, 14, 5, colors.hairHighlight);
+            drawPixel(ctx, 15, 5, colors.hairBase);
+            drawPixel(ctx, 16, 5, colors.hairBase);
+            drawPixel(ctx, 17, 5, colors.hairHighlight);
+            drawPixel(ctx, 18, 5, colors.hairBase);
+            drawPixel(ctx, 19, 5, colors.hairBase);
+            drawPixel(ctx, 20, 5, colors.hairShadow);
+
+            drawPixel(ctx, 10, 6, colors.hairShadow);
+            drawPixel(ctx, 11, 6, colors.hairBase);
+            drawPixel(ctx, 12, 6, colors.hairBase);
+            drawPixel(ctx, 13, 6, colors.skinShadow);
+            drawPixel(ctx, 14, 6, colors.skinBase);
+            drawPixel(ctx, 15, 6, colors.skinBase);
+            drawPixel(ctx, 16, 6, colors.skinBase);
+            drawPixel(ctx, 17, 6, colors.skinBase);
+            drawPixel(ctx, 18, 6, colors.skinShadow);
+            drawPixel(ctx, 19, 6, colors.hairBase);
+            drawPixel(ctx, 20, 6, colors.hairBase);
+            drawPixel(ctx, 21, 6, colors.hairShadow);
+
+            drawPixel(ctx, 10, 7, colors.hairShadow);
+            drawPixel(ctx, 11, 7, colors.hairBase);
+            drawPixel(ctx, 12, 7, colors.skinShadow);
+            drawPixel(ctx, 13, 7, colors.skinBase);
+            drawPixel(ctx, 14, 7, colors.skinBase);
+            drawPixel(ctx, 15, 7, colors.skinHighlight);
+            drawPixel(ctx, 16, 7, colors.skinHighlight);
+            drawPixel(ctx, 17, 7, colors.skinBase);
+            drawPixel(ctx, 18, 7, colors.skinBase);
+            drawPixel(ctx, 19, 7, colors.skinShadow);
+            drawPixel(ctx, 20, 7, colors.hairBase);
+            drawPixel(ctx, 21, 7, colors.hairShadow);
+
+            drawPixel(ctx, 10, 8, colors.hairShadow);
+            drawPixel(ctx, 11, 8, colors.skinShadow);
+            drawPixel(ctx, 12, 8, colors.skinBase);
+            drawPixel(ctx, 13, 8, colors.skinBase);
+            drawPixel(ctx, 14, 8, colors.skinHighlight);
+            drawPixel(ctx, 15, 8, colors.skinHighlight);
+            drawPixel(ctx, 16, 8, colors.skinHighlight);
+            drawPixel(ctx, 17, 8, colors.skinHighlight);
+            drawPixel(ctx, 18, 8, colors.skinBase);
+            drawPixel(ctx, 19, 8, colors.skinBase);
+            drawPixel(ctx, 20, 8, colors.skinShadow);
+            drawPixel(ctx, 21, 8, colors.hairShadow);
+
+            drawPixel(ctx, 11, 9, colors.skinShadow);
+            drawPixel(ctx, 12, 9, colors.skinBase);
+            drawPixel(ctx, 13, 9, colors.eyeWhite);
+            drawPixel(ctx, 14, 9, colors.eyeWhite);
+            drawPixel(ctx, 15, 9, colors.skinBase);
+            drawPixel(ctx, 16, 9, colors.skinBase);
+            drawPixel(ctx, 17, 9, colors.eyeWhite);
+            drawPixel(ctx, 18, 9, colors.eyeWhite);
+            drawPixel(ctx, 19, 9, colors.skinBase);
+            drawPixel(ctx, 20, 9, colors.skinShadow);
+
+            drawPixel(ctx, 11, 10, colors.skinShadow);
+            drawPixel(ctx, 12, 10, colors.skinBase);
+            drawPixel(ctx, 13, 10, colors.eyeIris);
+            drawPixel(ctx, 14, 10, colors.eyePupil);
+            drawPixel(ctx, 15, 10, colors.skinBase);
+            drawPixel(ctx, 16, 10, colors.skinBase);
+            drawPixel(ctx, 17, 10, colors.eyePupil);
+            drawPixel(ctx, 18, 10, colors.eyeIris);
+            drawPixel(ctx, 19, 10, colors.skinBase);
+            drawPixel(ctx, 20, 10, colors.skinShadow);
+
+            drawPixel(ctx, 11, 11, colors.skinShadow);
+            drawPixel(ctx, 12, 11, colors.skinBase);
+            drawPixel(ctx, 13, 11, colors.skinBase);
+            drawPixel(ctx, 14, 11, colors.skinBase);
+            drawPixel(ctx, 15, 11, colors.skinShadow);
+            drawPixel(ctx, 16, 11, colors.skinShadow);
+            drawPixel(ctx, 17, 11, colors.skinBase);
+            drawPixel(ctx, 18, 11, colors.skinBase);
+            drawPixel(ctx, 19, 11, colors.skinBase);
+            drawPixel(ctx, 20, 11, colors.skinShadow);
+
+            drawPixel(ctx, 11, 12, colors.skinShadow);
+            drawPixel(ctx, 12, 12, colors.skinBase);
+            drawPixel(ctx, 13, 12, colors.skinBase);
+            drawPixel(ctx, 14, 12, colors.skinBase);
+            drawPixel(ctx, 15, 12, colors.skinBase);
+            drawPixel(ctx, 16, 12, colors.skinBase);
+            drawPixel(ctx, 17, 12, colors.skinBase);
+            drawPixel(ctx, 18, 12, colors.skinBase);
+            drawPixel(ctx, 19, 12, colors.skinBase);
+            drawPixel(ctx, 20, 12, colors.skinShadow);
+
+            drawPixel(ctx, 11, 13, colors.skinShadow);
+            drawPixel(ctx, 12, 13, colors.skinBase);
+            drawPixel(ctx, 13, 13, colors.skinBase);
+            drawPixel(ctx, 14, 13, colors.skinShadow);
+            drawPixel(ctx, 15, 13, colors.skinShadow);
+            drawPixel(ctx, 16, 13, colors.skinShadow);
+            drawPixel(ctx, 17, 13, colors.skinShadow);
+            drawPixel(ctx, 18, 13, colors.skinBase);
+            drawPixel(ctx, 19, 13, colors.skinBase);
+            drawPixel(ctx, 20, 13, colors.skinShadow);
+
+            drawPixel(ctx, 12, 14, colors.skinShadow);
+            drawPixel(ctx, 13, 14, colors.skinBase);
+            drawPixel(ctx, 14, 14, colors.skinBase);
+            drawPixel(ctx, 15, 14, colors.skinBase);
+            drawPixel(ctx, 16, 14, colors.skinBase);
+            drawPixel(ctx, 17, 14, colors.skinBase);
+            drawPixel(ctx, 18, 14, colors.skinBase);
+            drawPixel(ctx, 19, 14, colors.skinShadow);
+
+            drawPixel(ctx, 13, 15, colors.skinShadow);
+            drawPixel(ctx, 14, 15, colors.skinBase);
+            drawPixel(ctx, 15, 15, colors.skinBase);
+            drawPixel(ctx, 16, 15, colors.skinBase);
+            drawPixel(ctx, 17, 15, colors.skinBase);
+            drawPixel(ctx, 18, 15, colors.skinShadow);
+
+            drawPixel(ctx, 11, 16, colors.shirtShadow);
+            drawPixel(ctx, 12, 16, colors.shirtBase);
+            drawPixel(ctx, 13, 16, colors.shirtBase);
+            drawPixel(ctx, 14, 16, colors.shirtHighlight);
+            drawPixel(ctx, 15, 16, colors.tieShadow);
+            drawPixel(ctx, 16, 16, colors.tieShadow);
+            drawPixel(ctx, 17, 16, colors.shirtHighlight);
+            drawPixel(ctx, 18, 16, colors.shirtBase);
+            drawPixel(ctx, 19, 16, colors.shirtBase);
+            drawPixel(ctx, 20, 16, colors.shirtShadow);
+
+            drawPixel(ctx, 10, 17, colors.shirtShadow);
+            drawPixel(ctx, 11, 17, colors.shirtBase);
+            drawPixel(ctx, 12, 17, colors.shirtBase);
+            drawPixel(ctx, 13, 17, colors.shirtHighlight);
+            drawPixel(ctx, 14, 17, colors.tieShadow);
+            drawPixel(ctx, 15, 17, colors.tieBase);
+            drawPixel(ctx, 16, 17, colors.tieBase);
+            drawPixel(ctx, 17, 17, colors.tieShadow);
+            drawPixel(ctx, 18, 17, colors.shirtHighlight);
+            drawPixel(ctx, 19, 17, colors.shirtBase);
+            drawPixel(ctx, 20, 17, colors.shirtBase);
+            drawPixel(ctx, 21, 17, colors.shirtShadow);
+
+            drawPixel(ctx, 10, 18, colors.suitShadow);
+            drawPixel(ctx, 11, 18, colors.shirtShadow);
+            drawPixel(ctx, 12, 18, colors.shirtBase);
+            drawPixel(ctx, 13, 18, colors.shirtHighlight);
+            drawPixel(ctx, 14, 18, colors.tieShadow);
+            drawPixel(ctx, 15, 18, colors.tieBase);
+            drawPixel(ctx, 16, 18, colors.tieHighlight);
+            drawPixel(ctx, 17, 18, colors.tieBase);
+            drawPixel(ctx, 18, 18, colors.shirtHighlight);
+            drawPixel(ctx, 19, 18, colors.shirtBase);
+            drawPixel(ctx, 20, 18, colors.shirtShadow);
+            drawPixel(ctx, 21, 18, colors.suitShadow);
+
+            drawPixel(ctx, 9, 19, colors.suitShadow);
+            drawPixel(ctx, 10, 19, colors.suitBase);
+            drawPixel(ctx, 11, 19, colors.shirtShadow);
+            drawPixel(ctx, 12, 19, colors.shirtBase);
+            drawPixel(ctx, 13, 19, colors.tieShadow);
+            drawPixel(ctx, 14, 19, colors.tieBase);
+            drawPixel(ctx, 15, 19, colors.tieBase);
+            drawPixel(ctx, 16, 19, colors.tieBase);
+            drawPixel(ctx, 17, 19, colors.tieShadow);
+            drawPixel(ctx, 18, 19, colors.shirtBase);
+            drawPixel(ctx, 19, 19, colors.shirtShadow);
+            drawPixel(ctx, 20, 19, colors.suitBase);
+            drawPixel(ctx, 21, 19, colors.suitShadow);
+
+            // From row 20 onwards, shift down 1px (breathing animation)
+            drawPixel(ctx, 9, 21, colors.suitShadow);
+            drawPixel(ctx, 10, 21, colors.suitBase);
+            drawPixel(ctx, 11, 21, colors.suitBase);
+            drawPixel(ctx, 12, 21, colors.tieShadow);
+            drawPixel(ctx, 13, 21, colors.tieShadow);
+            drawPixel(ctx, 14, 21, colors.tieBase);
+            drawPixel(ctx, 15, 21, colors.tieBase);
+            drawPixel(ctx, 16, 21, colors.tieBase);
+            drawPixel(ctx, 17, 21, colors.tieShadow);
+            drawPixel(ctx, 18, 21, colors.tieShadow);
+            drawPixel(ctx, 19, 21, colors.suitBase);
+            drawPixel(ctx, 20, 21, colors.suitBase);
+            drawPixel(ctx, 21, 21, colors.suitShadow);
+
+            drawPixel(ctx, 8, 22, colors.suitShadow);
+            drawPixel(ctx, 9, 22, colors.suitBase);
+            drawPixel(ctx, 10, 22, colors.suitBase);
+            drawPixel(ctx, 11, 22, colors.suitBase);
+            drawPixel(ctx, 12, 22, colors.suitBase);
+            drawPixel(ctx, 13, 22, colors.tieShadow);
+            drawPixel(ctx, 14, 22, colors.tieBase);
+            drawPixel(ctx, 15, 22, colors.tieBase);
+            drawPixel(ctx, 16, 22, colors.tieBase);
+            drawPixel(ctx, 17, 22, colors.tieShadow);
+            drawPixel(ctx, 18, 22, colors.suitBase);
+            drawPixel(ctx, 19, 22, colors.suitBase);
+            drawPixel(ctx, 20, 22, colors.suitBase);
+            drawPixel(ctx, 21, 22, colors.suitBase);
+            drawPixel(ctx, 22, 22, colors.suitShadow);
+
+            drawPixel(ctx, 7, 23, colors.suitShadow);
+            drawPixel(ctx, 8, 23, colors.suitBase);
+            drawPixel(ctx, 9, 23, colors.suitHighlight);
+            drawPixel(ctx, 10, 23, colors.suitBase);
+            drawPixel(ctx, 11, 23, colors.suitBase);
+            drawPixel(ctx, 12, 23, colors.suitBase);
+            drawPixel(ctx, 13, 23, colors.suitBase);
+            drawPixel(ctx, 14, 23, colors.tieShadow);
+            drawPixel(ctx, 15, 23, colors.tieBase);
+            drawPixel(ctx, 16, 23, colors.tieShadow);
+            drawPixel(ctx, 17, 23, colors.suitBase);
+            drawPixel(ctx, 18, 23, colors.suitBase);
+            drawPixel(ctx, 19, 23, colors.suitBase);
+            drawPixel(ctx, 20, 23, colors.suitBase);
+            drawPixel(ctx, 21, 23, colors.suitHighlight);
+            drawPixel(ctx, 22, 23, colors.suitBase);
+            drawPixel(ctx, 23, 23, colors.suitShadow);
+
+            drawPixel(ctx, 7, 24, colors.suitShadow);
+            drawPixel(ctx, 8, 24, colors.suitBase);
+            drawPixel(ctx, 9, 24, colors.suitBase);
+            drawPixel(ctx, 10, 24, colors.suitBase);
+            drawPixel(ctx, 11, 24, colors.suitBase);
+            drawPixel(ctx, 12, 24, colors.suitBase);
+            drawPixel(ctx, 13, 24, colors.suitBase);
+            drawPixel(ctx, 14, 24, colors.suitBase);
+            drawPixel(ctx, 15, 24, colors.suitBase);
+            drawPixel(ctx, 16, 24, colors.suitBase);
+            drawPixel(ctx, 17, 24, colors.suitBase);
+            drawPixel(ctx, 18, 24, colors.suitBase);
+            drawPixel(ctx, 19, 24, colors.suitBase);
+            drawPixel(ctx, 20, 24, colors.suitBase);
+            drawPixel(ctx, 21, 24, colors.suitBase);
+            drawPixel(ctx, 22, 24, colors.suitBase);
+            drawPixel(ctx, 23, 24, colors.suitShadow);
+
+            drawPixel(ctx, 6, 25, colors.skinShadow);
+            drawPixel(ctx, 7, 25, colors.skinBase);
+            drawPixel(ctx, 8, 25, colors.suitShadow);
+            drawPixel(ctx, 9, 25, colors.suitBase);
+            drawPixel(ctx, 10, 25, colors.suitBase);
+            drawPixel(ctx, 11, 25, colors.suitBase);
+            drawPixel(ctx, 12, 25, colors.suitBase);
+            drawPixel(ctx, 13, 25, colors.suitBase);
+            drawPixel(ctx, 14, 25, colors.suitBase);
+            drawPixel(ctx, 15, 25, colors.suitBase);
+            drawPixel(ctx, 16, 25, colors.suitBase);
+            drawPixel(ctx, 17, 25, colors.suitBase);
+            drawPixel(ctx, 18, 25, colors.suitBase);
+            drawPixel(ctx, 19, 25, colors.suitBase);
+            drawPixel(ctx, 20, 25, colors.suitBase);
+            drawPixel(ctx, 21, 25, colors.suitBase);
+            drawPixel(ctx, 22, 25, colors.suitShadow);
+            drawPixel(ctx, 23, 25, colors.skinBase);
+            drawPixel(ctx, 24, 25, colors.skinShadow);
+
+            drawPixel(ctx, 6, 26, colors.skinShadow);
+            drawPixel(ctx, 7, 26, colors.skinBase);
+            drawPixel(ctx, 8, 26, colors.skinBase);
+            drawPixel(ctx, 9, 26, colors.suitShadow);
+            drawPixel(ctx, 10, 26, colors.pantsShadow);
+            drawPixel(ctx, 11, 26, colors.pantsBase);
+            drawPixel(ctx, 12, 26, colors.pantsBase);
+            drawPixel(ctx, 13, 26, colors.pantsBase);
+            drawPixel(ctx, 14, 26, colors.pantsBase);
+            drawPixel(ctx, 15, 26, colors.pantsShadow);
+            drawPixel(ctx, 16, 26, colors.pantsShadow);
+            drawPixel(ctx, 17, 26, colors.pantsBase);
+            drawPixel(ctx, 18, 26, colors.pantsBase);
+            drawPixel(ctx, 19, 26, colors.pantsBase);
+            drawPixel(ctx, 20, 26, colors.pantsBase);
+            drawPixel(ctx, 21, 26, colors.suitShadow);
+            drawPixel(ctx, 22, 26, colors.skinBase);
+            drawPixel(ctx, 23, 26, colors.skinBase);
+            drawPixel(ctx, 24, 26, colors.skinShadow);
+
+            drawPixel(ctx, 11, 27, colors.pantsShadow);
+            drawPixel(ctx, 12, 27, colors.pantsBase);
+            drawPixel(ctx, 13, 27, colors.pantsBase);
+            drawPixel(ctx, 14, 27, colors.pantsBase);
+            drawPixel(ctx, 15, 27, colors.pantsShadow);
+            drawPixel(ctx, 16, 27, colors.pantsShadow);
+            drawPixel(ctx, 17, 27, colors.pantsBase);
+            drawPixel(ctx, 18, 27, colors.pantsBase);
+            drawPixel(ctx, 19, 27, colors.pantsBase);
+            drawPixel(ctx, 20, 27, colors.pantsShadow);
+
+            drawPixel(ctx, 11, 28, colors.pantsShadow);
+            drawPixel(ctx, 12, 28, colors.pantsBase);
+            drawPixel(ctx, 13, 28, colors.pantsBase);
+            drawPixel(ctx, 14, 28, colors.pantsShadow);
+            drawPixel(ctx, 16, 28, colors.pantsShadow);
+            drawPixel(ctx, 17, 28, colors.pantsBase);
+            drawPixel(ctx, 18, 28, colors.pantsBase);
+            drawPixel(ctx, 19, 28, colors.pantsShadow);
+
+            drawPixel(ctx, 11, 29, colors.shoeShadow);
+            drawPixel(ctx, 12, 29, colors.shoeBase);
+            drawPixel(ctx, 13, 29, colors.shoeBase);
+            drawPixel(ctx, 14, 29, colors.shoeShadow);
+            drawPixel(ctx, 16, 29, colors.shoeShadow);
+            drawPixel(ctx, 17, 29, colors.shoeBase);
+            drawPixel(ctx, 18, 29, colors.shoeBase);
+            drawPixel(ctx, 19, 29, colors.shoeShadow);
+
+            drawPixel(ctx, 10, 30, colors.shoeShadow);
+            drawPixel(ctx, 11, 30, colors.shoeBase);
+            drawPixel(ctx, 12, 30, colors.shoeHighlight);
+            drawPixel(ctx, 13, 30, colors.shoeBase);
+            drawPixel(ctx, 14, 30, colors.shoeBase);
+            drawPixel(ctx, 15, 30, colors.shoeShadow);
+            drawPixel(ctx, 16, 30, colors.shoeShadow);
+            drawPixel(ctx, 17, 30, colors.shoeBase);
+            drawPixel(ctx, 18, 30, colors.shoeHighlight);
+            drawPixel(ctx, 19, 30, colors.shoeBase);
+            drawPixel(ctx, 20, 30, colors.shoeShadow);
+        }
+
+        // Initialize canvases
+        const frame1Canvas = document.getElementById('brent-frame1');
+        const frame2Canvas = document.getElementById('brent-frame2');
+        const animatedCanvas = document.getElementById('brent-animated');
+
+        drawBrentFrame1(frame1Canvas);
+        drawBrentFrame2(frame2Canvas);
+
+        // Animate the large version
+        let currentFrame = 0;
+        const animatedCtx = animatedCanvas.getContext('2d');
+        animatedCtx.imageSmoothingEnabled = false;
+
+        function animate() {
+            currentFrame = (currentFrame + 1) % 120; // 2 second loop at 60fps
+
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = 32;
+            tempCanvas.height = 32;
+
+            if (currentFrame < 60) {
+                drawBrentFrame1(tempCanvas);
+            } else {
+                drawBrentFrame2(tempCanvas);
+            }
+
+            animatedCtx.clearRect(0, 0, 256, 256);
+            animatedCtx.drawImage(tempCanvas, 0, 0, 32, 32, 0, 0, 256, 256);
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>

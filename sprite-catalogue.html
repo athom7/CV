@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprite Catalogue - The Brent Companion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #f0f0f0;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffd700;
+            font-size: 2.5rem;
+            text-shadow: 3px 3px 0 #000;
+            margin-bottom: 20px;
+        }
+
+        .intro {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #f0f0f0;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sprite-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .sprite-card {
+            background: #3a3a3a;
+            border: 4px solid #8b8b8b;
+            padding: 30px;
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .sprite-card h2 {
+            color: #ffd700;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .sprite-card .role {
+            color: #aaa;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .sprite-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+            margin: 30px 0;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border: 2px solid #5a5a5a;
+        }
+
+        .description {
+            color: #f0f0f0;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .animation-info {
+            background: #2b2b2b;
+            padding: 15px;
+            border-left: 4px solid #ffd700;
+            margin-top: 20px;
+        }
+
+        .animation-info h3 {
+            color: #ffd700;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .animation-info p {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Brent sprites */
+        .brent-sprite {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(to bottom,
+                #f4c2a5 0%, #f4c2a5 30%,
+                #ffffff 30%, #ffffff 40%,
+                #333333 40%, #333333 70%,
+                #666666 70%, #666666 100%
+            );
+            border: 3px solid #000;
+            position: relative;
+        }
+
+        .brent-sprite::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 25%;
+            width: 50%;
+            height: 15%;
+            background: #8b4513;
+        }
+
+        .brent-sprite::after {
+            content: '🤔';
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+        }
+
+        .brent-idle {
+            animation: brent-idle 2s ease-in-out infinite;
+        }
+
+        @keyframes brent-idle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .brent-gesture {
+            animation: brent-gesture 3s ease-in-out infinite;
+        }
+
+        @keyframes brent-gesture {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            15% { transform: rotate(-5deg) scale(1.02); }
+            30% { transform: rotate(5deg) scale(0.98); }
+            45% { transform: rotate(-3deg) scale(1.01); }
+            60% { transform: rotate(0deg) scale(1); }
+        }
+
+        .brent-intro {
+            width: 200px;
+            height: 200px;
+        }
+
+        .brent-intro::after {
+            content: '😎';
+            font-size: 3rem;
+        }
+
+        /* Tim sprite */
+        .tim-sprite {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(to bottom,
+                #8b4513 0%, #8b4513 20%,
+                #f4c2a5 20%, #f4c2a5 40%,
+                #4169e1 40%, #4169e1 60%,
+                #2c5282 60%, #2c5282 100%
+            );
+            border: 2px solid #000;
+            position: relative;
+            animation: tim-look 3s ease-in-out infinite;
+        }
+
+        @keyframes tim-look {
+            0%, 20%, 100% { transform: rotateY(0deg) scale(1); }
+            35%, 85% { transform: rotateY(15deg) scale(1.08); }
+        }
+
+        .tim-sprite::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 20%;
+            width: 60%;
+            height: 12%;
+            background: #654321;
+        }
+
+        .tim-sprite::after {
+            content: '🤨';
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+        }
+
+        /* Gareth sprite */
+        .gareth-sprite {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(to bottom,
+                #d4a574 0%, #d4a574 25%,
+                #f4c2a5 25%, #f4c2a5 45%,
+                #ffffff 45%, #ffffff 60%,
+                #4a5568 60%, #4a5568 100%
+            );
+            border: 2px solid #000;
+            position: relative;
+            animation: gareth-enthusiastic 2s ease-in-out infinite;
+        }
+
+        @keyframes gareth-enthusiastic {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(-5deg); }
+            50% { transform: translateY(-5px) rotate(5deg); }
+            75% { transform: translateY(-8px) rotate(-3deg); }
+        }
+
+        .gareth-sprite::before {
+            content: '';
+            position: absolute;
+            top: 8%;
+            left: 15%;
+            width: 70%;
+            height: 18%;
+            background: #c9a86a;
+        }
+
+        .gareth-sprite::after {
+            content: '😤';
+            position: absolute;
+            top: 28%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+        }
+
+        .usage-context {
+            background: #4a4a4a;
+            border: 3px solid #ffd700;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .usage-context h4 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .usage-context p {
+            color: #f0f0f0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .comparison {
+            background: #2b2b2b;
+            border: 4px solid #ffd700;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .comparison h2 {
+            color: #ffd700;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .comparison ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .comparison li {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #3a3a3a;
+            border-left: 4px solid #8b8b8b;
+        }
+
+        .comparison li strong {
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Sprite Catalogue</h1>
+        <p class="intro">
+            Here are all the character sprites used in The Brent Companion. Each character has their own personality
+            and animation style. Hover over them and watch them animate!
+        </p>
+
+        <div class="sprite-grid">
+            <!-- Brent Intro -->
+            <div class="sprite-card">
+                <h2>David Brent</h2>
+                <p class="role">Welcome Screen Version</p>
+                <div class="sprite-container">
+                    <div class="brent-sprite brent-intro brent-idle"></div>
+                </div>
+                <p class="description">
+                    Larger version (200x200px) used on the welcome screen. Features the classic sunglasses emoji 😎
+                    and gentle idle animation that makes Brent subtly bob up and down.
+                </p>
+                <div class="animation-info">
+                    <h3>Animation: Idle Bounce</h3>
+                    <p>A gentle 2-second loop where Brent bobs 5px up and down, suggesting he's casually confident and ready to help.</p>
+                </div>
+            </div>
+
+            <!-- Brent Feedback -->
+            <div class="sprite-card">
+                <h2>David Brent</h2>
+                <p class="role">Feedback Version</p>
+                <div class="sprite-container">
+                    <div class="brent-sprite brent-gesture"></div>
+                </div>
+                <p class="description">
+                    Standard size (150x150px) with thoughtful emoji 🤔. Used when delivering feedback during evaluation.
+                    Features a more dynamic "gesture" animation with rotation and scaling.
+                </p>
+                <div class="animation-info">
+                    <h3>Animation: Gesture</h3>
+                    <p>3-second animation with tilts and subtle scaling, as if Brent is gesticulating while making his point.</p>
+                </div>
+                <div class="usage-context">
+                    <h4>When it appears:</h4>
+                    <p>Shows up when delivering feedback after each criterion evaluation. The main character sprite.</p>
+                </div>
+            </div>
+
+            <!-- Tim -->
+            <div class="sprite-card">
+                <h2>Tim Canterbury</h2>
+                <p class="role">The Reality Check</p>
+                <div class="sprite-container">
+                    <div class="tim-sprite"></div>
+                </div>
+                <p class="description">
+                    Smaller sprite (120x120px) with the raised eyebrow emoji 🤨. Brown hair, blue shirt.
+                    Features "the look" - Tim's signature move where he glances at the camera with skepticism.
+                </p>
+                <div class="animation-info">
+                    <h3>Animation: The Look</h3>
+                    <p>3-second animation with 3D rotation (rotateY) and slight scale increase, mimicking Tim's famous glances to camera.</p>
+                </div>
+                <div class="usage-context">
+                    <h4>When it appears:</h4>
+                    <p>20% chance when you give yourself a high score (8-10). Delivers deadpan reality checks like "Ten out of ten. Right." or "*looks at camera*"</p>
+                </div>
+            </div>
+
+            <!-- Gareth -->
+            <div class="sprite-card">
+                <h2>Gareth Keenan</h2>
+                <p class="role">The Eager Sidekick</p>
+                <div class="sprite-container">
+                    <div class="gareth-sprite"></div>
+                </div>
+                <p class="description">
+                    Smaller sprite (120x120px) with determined/frustrated emoji 😤. Lighter brown hair, white collar, grey clothing.
+                    Bouncy, enthusiastic animation reflecting Gareth's overeager personality.
+                </p>
+                <div class="animation-info">
+                    <h3>Animation: Enthusiastic Bounce</h3>
+                    <p>2-second energetic animation with vertical jumps and rotations, suggesting Gareth's desperate enthusiasm to contribute.</p>
+                </div>
+                <div class="usage-context">
+                    <h4>When it appears:</h4>
+                    <p>10% random chance after Brent speaks. Enthusiastically agrees with Brent while accidentally highlighting the problem.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="comparison">
+            <h2>Sprite Comparison Notes</h2>
+            <ul>
+                <li><strong>Brent (Large):</strong> Best for welcome screens and main branding. The sunglasses give him swagger.</li>
+                <li><strong>Brent (Standard):</strong> Perfect for feedback delivery. Thoughtful emoji matches the evaluative context.</li>
+                <li><strong>Tim:</strong> Excellent visual contrast with the skeptical emoji. Animation is subtle but effective.</li>
+                <li><strong>Gareth:</strong> Most energetic animation. The frustrated emoji works well for his over-eager character.</li>
+            </ul>
+        </div>
+
+        <div class="comparison" style="margin-top: 30px;">
+            <h2>Technical Details</h2>
+            <ul>
+                <li><strong>Construction:</strong> All sprites use CSS gradients and pseudo-elements (no image files)</li>
+                <li><strong>Performance:</strong> Lightweight and fast-loading, perfect for web use</li>
+                <li><strong>Accessibility:</strong> Could potentially add ARIA labels for screen readers</li>
+                <li><strong>Scalability:</strong> Easy to adjust sizes and colors via CSS variables</li>
+                <li><strong>Browser Support:</strong> Works on all modern browsers with CSS animation support</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
