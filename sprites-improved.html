@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Improved Pixel Art Sprites</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #f0f0f0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffd700;
+            font-size: 2.5rem;
+            text-shadow: 3px 3px 0 #000;
+            margin-bottom: 20px;
+        }
+
+        .note {
+            text-align: center;
+            background: #3a3a3a;
+            border: 3px solid #ffd700;
+            padding: 20px;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sprite-showcase {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .sprite-card {
+            background: #3a3a3a;
+            border: 4px solid #8b8b8b;
+            padding: 30px;
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .sprite-card h2 {
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .sprite-container {
+            background: #2b2b2b;
+            padding: 40px;
+            border: 2px solid #5a5a5a;
+            display: inline-block;
+            position: relative;
+            overflow: visible;
+        }
+
+        /* Pixel art using positioned divs */
+        .pixel-sprite {
+            position: relative;
+            width: 64px;
+            height: 128px;
+            margin: 0 auto;
+        }
+
+        .pixel {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+        }
+
+        /* Brent - More detailed sprite with shading */
+        .brent-detailed {
+            width: 64px;
+            height: 128px;
+            position: relative;
+            transform-origin: center;
+        }
+
+        /* Using canvas approach for better detail */
+        .sprite-canvas {
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+            width: 128px;
+            height: 256px;
+        }
+
+        .description {
+            margin-top: 20px;
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .animation-preview {
+            margin-top: 20px;
+            padding: 15px;
+            background: #2b2b2b;
+            border-left: 4px solid #ffd700;
+        }
+
+        .animation-preview h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .limitation-note {
+            background: #8b4513;
+            border: 3px solid #ffd700;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .limitation-note h2 {
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .limitation-note p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .limitation-note ul {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Improved Sprite Attempt</h1>
+
+        <div class="note">
+            <p><strong>Note:</strong> I've attempted to create more detailed sprites, but there's a significant technical limitation with CSS-based pixel art that I need to explain below.</p>
+        </div>
+
+        <div class="sprite-showcase">
+            <div class="sprite-card">
+                <h2>David Brent</h2>
+                <div class="sprite-container">
+                    <canvas id="brent-canvas" class="sprite-canvas" width="32" height="64"></canvas>
+                </div>
+                <div class="description">
+                    Using HTML5 Canvas for more detailed pixel-by-pixel control
+                </div>
+            </div>
+
+            <div class="sprite-card">
+                <h2>Tim Canterbury</h2>
+                <div class="sprite-container">
+                    <canvas id="tim-canvas" class="sprite-canvas" width="32" height="64"></canvas>
+                </div>
+                <div class="description">
+                    Canvas allows for proper shading and detail
+                </div>
+            </div>
+
+            <div class="sprite-card">
+                <h2>Gareth Keenan</h2>
+                <div class="sprite-container">
+                    <canvas id="gareth-canvas" class="sprite-canvas" width="32" height="64"></canvas>
+                </div>
+                <div class="description">
+                    More control over individual pixels
+                </div>
+            </div>
+        </div>
+
+        <div class="limitation-note">
+            <h2>⚠️ Technical Limitation & Recommendation</h2>
+            <p>
+                Creating pixel art sprites of the quality shown in your reference image is <strong>extremely difficult</strong>
+                in pure CSS/HTML without actual image files. Here's why:
+            </p>
+            <ul>
+                <li><strong>Complexity:</strong> Your reference sprite has 50+ colors with detailed shading - this would require
+                hundreds of lines of CSS per sprite</li>
+                <li><strong>Animation Frames:</strong> Your reference shows 30+ different animation frames (idle, walk, run, jump, etc.)
+                - each would need separate CSS definitions</li>
+                <li><strong>Detail Level:</strong> The facial expressions, clothing folds, and shading require professional pixel
+                art skills and proper sprite design tools</li>
+            </ul>
+
+            <h2 style="margin-top: 25px;">✅ Better Approach:</h2>
+            <p>I recommend one of these options:</p>
+            <ol style="margin-left: 20px; line-height: 1.8;">
+                <li><strong>Use actual PNG sprite sheets:</strong> Create or commission proper pixel art sprites in a tool like
+                Aseprite, Piskel, or Photoshop, then use them as image files. This is how professional games do it.</li>
+                <li><strong>Hire a pixel artist:</strong> Sites like Fiverr or itch.io have pixel artists who can create
+                custom character sprites that match your reference quality.</li>
+                <li><strong>Use free sprite assets:</strong> Download free pixel art sprites from sites like OpenGameArt.org
+                or itch.io and customize colors to match your characters.</li>
+                <li><strong>Use a simpler style:</strong> Embrace a more minimalist pixel art aesthetic that's achievable
+                with CSS (8x8 or 12x12 instead of 32x32 with complex shading).</li>
+            </ol>
+
+            <h2 style="margin-top: 25px;">💡 What I Can Do:</h2>
+            <p>
+                I can create <strong>simple but clean</strong> pixel art sprites in CSS (like 12x12 or 16x16 with basic shading),
+                OR I can help you integrate actual PNG sprite sheet images if you have them or can obtain them.
+                Which approach would you prefer?
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Draw Brent sprite on canvas
+        const brentCanvas = document.getElementById('brent-canvas');
+        const brentCtx = brentCanvas.getContext('2d');
+
+        // Scale for visibility
+        brentCtx.imageSmoothingEnabled = false;
+
+        // This is a more detailed attempt, but still limited compared to professional sprites
+        // Hair/head (brown with shading)
+        brentCtx.fillStyle = '#654321';
+        brentCtx.fillRect(10, 4, 12, 3);
+        brentCtx.fillStyle = '#8b4513';
+        brentCtx.fillRect(9, 7, 14, 4);
+
+        // Face (with shading)
+        brentCtx.fillStyle = '#f4c2a5';
+        brentCtx.fillRect(11, 11, 10, 8);
+        brentCtx.fillStyle = '#d4a574'; // shadow
+        brentCtx.fillRect(11, 17, 2, 2);
+        brentCtx.fillRect(19, 17, 2, 2);
+
+        // Eyes
+        brentCtx.fillStyle = '#000';
+        brentCtx.fillRect(13, 13, 2, 2);
+        brentCtx.fillRect(17, 13, 2, 2);
+
+        // Mouth
+        brentCtx.fillStyle = '#8b4513';
+        brentCtx.fillRect(13, 16, 6, 1);
+
+        // Shirt (white with grey shading)
+        brentCtx.fillStyle = '#ffffff';
+        brentCtx.fillRect(10, 20, 12, 8);
+        brentCtx.fillStyle = '#e0e0e0';
+        brentCtx.fillRect(10, 20, 2, 8);
+        brentCtx.fillRect(20, 20, 2, 8);
+
+        // Tie (red)
+        brentCtx.fillStyle = '#8b0000';
+        brentCtx.fillRect(15, 20, 2, 10);
+        brentCtx.fillStyle = '#a00000';
+        brentCtx.fillRect(15, 20, 1, 10);
+
+        // Suit jacket (grey with shading)
+        brentCtx.fillStyle = '#4a4a4a';
+        brentCtx.fillRect(8, 28, 16, 12);
+        brentCtx.fillStyle = '#333333';
+        brentCtx.fillRect(8, 28, 2, 12);
+        brentCtx.fillRect(22, 28, 2, 12);
+
+        // Arms
+        brentCtx.fillStyle = '#4a4a4a';
+        brentCtx.fillRect(6, 28, 3, 12);
+        brentCtx.fillRect(23, 28, 3, 12);
+
+        // Hands
+        brentCtx.fillStyle = '#f4c2a5';
+        brentCtx.fillRect(6, 38, 3, 3);
+        brentCtx.fillRect(23, 38, 3, 3);
+
+        // Pants (dark grey)
+        brentCtx.fillStyle = '#333333';
+        brentCtx.fillRect(10, 40, 5, 15);
+        brentCtx.fillRect(17, 40, 5, 15);
+
+        // Shoes
+        brentCtx.fillStyle = '#000';
+        brentCtx.fillRect(9, 55, 6, 4);
+        brentCtx.fillRect(17, 55, 6, 4);
+
+        // Tim sprite
+        const timCanvas = document.getElementById('tim-canvas');
+        const timCtx = timCanvas.getContext('2d');
+        timCtx.imageSmoothingEnabled = false;
+
+        // Hair (fuller, darker brown)
+        timCtx.fillStyle = '#654321';
+        timCtx.fillRect(9, 4, 14, 8);
+
+        // Face
+        timCtx.fillStyle = '#f4c2a5';
+        timCtx.fillRect(11, 11, 10, 8);
+
+        // Eyes
+        timCtx.fillStyle = '#000';
+        timCtx.fillRect(13, 13, 2, 2);
+        timCtx.fillRect(17, 13, 2, 2);
+
+        // Slight smile
+        timCtx.fillStyle = '#8b4513';
+        timCtx.fillRect(14, 16, 4, 1);
+
+        // Blue shirt
+        timCtx.fillStyle = '#4169e1';
+        timCtx.fillRect(9, 20, 14, 16);
+        timCtx.fillStyle = '#2c5282';
+        timCtx.fillRect(9, 20, 2, 16);
+        timCtx.fillRect(21, 20, 2, 16);
+
+        // Arms
+        timCtx.fillStyle = '#4169e1';
+        timCtx.fillRect(7, 22, 3, 10);
+        timCtx.fillRect(22, 22, 3, 10);
+
+        // Hands
+        timCtx.fillStyle = '#f4c2a5';
+        timCtx.fillRect(7, 31, 3, 3);
+        timCtx.fillRect(22, 31, 3, 3);
+
+        // Pants
+        timCtx.fillStyle = '#333333';
+        timCtx.fillRect(10, 36, 5, 15);
+        timCtx.fillRect(17, 36, 5, 15);
+
+        // Shoes
+        timCtx.fillStyle = '#000';
+        timCtx.fillRect(9, 51, 6, 4);
+        timCtx.fillRect(17, 51, 6, 4);
+
+        // Gareth sprite
+        const garethCanvas = document.getElementById('gareth-canvas');
+        const garethCtx = garethCanvas.getContext('2d');
+        garethCtx.imageSmoothingEnabled = false;
+
+        // Short military hair (blonde)
+        garethCtx.fillStyle = '#c9a86a';
+        garethCtx.fillRect(10, 5, 12, 6);
+
+        // Face
+        garethCtx.fillStyle = '#f4c2a5';
+        garethCtx.fillRect(11, 11, 10, 8);
+
+        // Stern eyes
+        garethCtx.fillStyle = '#000';
+        garethCtx.fillRect(12, 13, 3, 2);
+        garethCtx.fillRect(17, 13, 3, 2);
+
+        // Stern mouth
+        garethCtx.fillStyle = '#8b4513';
+        garethCtx.fillRect(13, 17, 6, 1);
+
+        // White shirt
+        garethCtx.fillStyle = '#ffffff';
+        garethCtx.fillRect(9, 20, 14, 10);
+
+        // Grey vest
+        garethCtx.fillStyle = '#4a5568';
+        garethCtx.fillRect(8, 26, 16, 14);
+        garethCtx.fillStyle = '#ffffff';
+        garethCtx.fillRect(11, 26, 10, 6);
+
+        // Arms
+        garethCtx.fillStyle = '#4a5568';
+        garethCtx.fillRect(6, 26, 3, 10);
+        garethCtx.fillRect(23, 26, 3, 10);
+
+        // Hands
+        garethCtx.fillStyle = '#f4c2a5';
+        garethCtx.fillRect(6, 35, 3, 3);
+        garethCtx.fillRect(23, 35, 3, 3);
+
+        // Pants
+        garethCtx.fillStyle = '#333333';
+        garethCtx.fillRect(10, 40, 5, 15);
+        garethCtx.fillRect(17, 40, 5, 15);
+
+        // Shoes
+        garethCtx.fillStyle = '#000';
+        garethCtx.fillRect(9, 55, 6, 4);
+        garethCtx.fillRect(17, 55, 6, 4);
+    </script>
+</body>
+</html>
