@@ -824,13 +824,17 @@
             }, []);
 
             return (
-                <div className="welcome-screen">
-                    <button className="skip-button" onClick={onContinue}>
+                <div className="welcome-screen" role="main" aria-labelledby="welcome-title">
+                    <button
+                        className="skip-button"
+                        onClick={onContinue}
+                        aria-label="Skip introduction and go directly to section selection"
+                    >
                         SKIP →
                     </button>
-                    <div className="intro-content">
-                        <div className="brent-intro-sprite"></div>
-                        <div className="intro-text">
+                    <div className="intro-content" role="region" aria-label="Introduction">
+                        <div className="brent-intro-sprite" role="img" aria-label="David Brent character"></div>
+                        <div className="intro-text" id="welcome-title" aria-live="polite">
                             {animationStep >= 1 && (
                                 <div className="intro-text-line" style={{animationDelay: '0s'}}>
                                     "Right, so you want to write a job application..."
@@ -848,7 +852,11 @@
                             )}
                         </div>
                         {animationStep >= 3 && (
-                            <button className="continue-button" onClick={onContinue}>
+                            <button
+                                className="continue-button"
+                                onClick={onContinue}
+                                aria-label="Continue to section selection"
+                            >
                                 LET'S GO
                             </button>
                         )}
@@ -860,9 +868,9 @@
         function SectionSelection({ onSelectSection }) {
             return (
                 <div className="container">
-                    <div className="section-selection">
-                        <h1>SELECT A SECTION TO EVALUATE</h1>
-                        <div className="section-selection-intro">
+                    <div className="section-selection" role="main" aria-labelledby="section-selection-heading">
+                        <h1 id="section-selection-heading">SELECT A SECTION TO EVALUATE</h1>
+                        <div className="section-selection-intro" role="region" aria-label="Instructions">
                             <p>
                                 Danish DJØF cover letters follow a specific structure. Select which section
                                 you want to evaluate, paste your text, and get targeted feedback based on
@@ -872,12 +880,14 @@
                                 Your completed evaluations will stack above in proper DJØF order.
                             </p>
                         </div>
-                        <div className="section-grid">
+                        <div className="section-grid" role="list">
                             {DJOF_SECTIONS.map(section => (
                                 <button
                                     key={section.id}
                                     className="section-button"
                                     onClick={() => onSelectSection(section)}
+                                    role="listitem"
+                                    aria-label={`Evaluate ${section.name}: ${section.description}`}
                                 >
                                     <h3>{section.name}</h3>
                                     <p>{section.description}</p>
@@ -987,20 +997,28 @@
             );
 
             return (
-                <div className="evaluation-screen">
-                    <div className="office-background scene-office"></div>
+                <div className="evaluation-screen" role="main">
+                    <div className="office-background scene-office" aria-hidden="true"></div>
 
-                    <button className="back-button" onClick={onBackToSelection}>
+                    <button
+                        className="back-button"
+                        onClick={onBackToSelection}
+                        aria-label="Go back to section selection"
+                    >
                         ← BACK TO SECTION SELECTION
                     </button>
 
                     <div className="evaluation-header">
-                        <h2>Evaluating: {selectedSection.name}</h2>
+                        <h2 id="evaluation-heading">Evaluating: {selectedSection.name}</h2>
                     </div>
 
                     {/* Completed Evaluations Stack */}
                     {sortedEvaluations.length > 0 && (
-                        <div className="evaluations-stack">
+                        <div
+                            className="evaluations-stack"
+                            role="region"
+                            aria-label="Completed evaluations"
+                        >
                             {sortedEvaluations.map((evaluation, index) => (
                                 <CompletedEvaluation
                                     key={`${evaluation.section.id}-${index}`}
@@ -1014,20 +1032,26 @@
                     <div className="text-box-container">
                         <div className="text-box-frame">
                             <div className="text-box-header">
-                                <h3>Your Text</h3>
-                                <span className="section-badge">{selectedSection.name}</span>
+                                <h3 id="text-input-heading">Your Text</h3>
+                                <span className="section-badge" aria-label={`Current section: ${selectedSection.name}`}>
+                                    {selectedSection.name}
+                                </span>
                             </div>
                             <textarea
                                 value={text}
                                 onChange={(e) => setText(e.target.value)}
                                 placeholder={`Paste your ${selectedSection.name.toLowerCase()} text here...`}
                                 disabled={isEvaluating}
+                                aria-label={`Text input for ${selectedSection.name}`}
+                                aria-describedby="text-input-heading"
                             />
                             {!isEvaluating && (
                                 <button
                                     className="evaluate-button"
                                     onClick={handleStartEvaluation}
                                     disabled={!text.trim()}
+                                    aria-label={`Start evaluation of ${selectedSection.name}`}
+                                    aria-disabled={!text.trim()}
                                 >
                                     START EVALUATION
                                 </button>
@@ -1037,12 +1061,18 @@
 
                     {/* Evaluation Interface */}
                     {isEvaluating && !showingFeedback && (
-                        <div className="evaluation-feedback">
+                        <div className="evaluation-feedback" role="region" aria-labelledby="current-criterion">
                             <div className="character-feedback">
-                                <h3 style={{color: '#ffd700', marginBottom: '20px', textAlign: 'center'}}>
+                                <h3
+                                    id="current-criterion"
+                                    style={{color: '#ffd700', marginBottom: '20px', textAlign: 'center'}}
+                                >
                                     {currentCriterionInfo.name}
                                 </h3>
-                                <p style={{fontSize: '1.1rem', textAlign: 'center', marginBottom: '30px'}}>
+                                <p
+                                    id="criterion-question"
+                                    style={{fontSize: '1.1rem', textAlign: 'center', marginBottom: '30px'}}
+                                >
                                     {currentCriterionInfo.question}
                                 </p>
                                 <div style={{textAlign: 'center'}}>
@@ -1053,11 +1083,25 @@
                                         value={currentScore}
                                         onChange={(e) => setCurrentScore(parseInt(e.target.value))}
                                         style={{width: '80%', height: '12px', margin: '20px 0'}}
+                                        aria-label={`Rate ${currentCriterionInfo.name} from 1 to 10`}
+                                        aria-describedby="criterion-question score-display"
+                                        aria-valuemin="1"
+                                        aria-valuemax="10"
+                                        aria-valuenow={currentScore}
+                                        aria-valuetext={`${currentScore} out of 10`}
                                     />
-                                    <div style={{fontSize: '2rem', color: '#ffd700', marginBottom: '20px'}}>
+                                    <div
+                                        id="score-display"
+                                        style={{fontSize: '2rem', color: '#ffd700', marginBottom: '20px'}}
+                                        aria-live="polite"
+                                    >
                                         {currentScore}/10
                                     </div>
-                                    <button className="evaluate-button" onClick={handleScoreSubmit}>
+                                    <button
+                                        className="evaluate-button"
+                                        onClick={handleScoreSubmit}
+                                        aria-label={`Submit score of ${currentScore} for ${currentCriterionInfo.name}`}
+                                    >
                                         SUBMIT SCORE
                                     </button>
                                 </div>
@@ -1067,38 +1111,44 @@
 
                     {/* Feedback Display */}
                     {showingFeedback && (
-                        <div className="evaluation-feedback">
+                        <div className="evaluation-feedback" role="region" aria-live="polite" aria-label="Evaluation feedback">
                             <div className="character-feedback">
-                                <div className="brent-sprite"></div>
+                                <div className="brent-sprite" role="img" aria-label="David Brent character sprite"></div>
                                 <div className="character-name">David Brent:</div>
-                                <div className="character-dialogue">{feedback}</div>
+                                <div className="character-dialogue" role="article" aria-label="David Brent's feedback">
+                                    {feedback}
+                                </div>
 
                                 {extraCharacter === 'tim' && (
-                                    <div style={{marginTop: '30px'}}>
-                                        <div className="tim-sprite"></div>
+                                    <div style={{marginTop: '30px'}} role="complementary">
+                                        <div className="tim-sprite" role="img" aria-label="Tim Canterbury character sprite"></div>
                                         <div className="character-name" style={{textAlign: 'center', marginTop: '15px'}}>
                                             Tim:
                                         </div>
-                                        <div className="character-dialogue" style={{textAlign: 'center', fontStyle: 'italic'}}>
+                                        <div className="character-dialogue" style={{textAlign: 'center', fontStyle: 'italic'}} role="article" aria-label="Tim's comment">
                                             {extraDialogue}
                                         </div>
                                     </div>
                                 )}
 
                                 {extraCharacter === 'gareth' && (
-                                    <div style={{marginTop: '30px'}}>
-                                        <div className="gareth-sprite"></div>
+                                    <div style={{marginTop: '30px'}} role="complementary">
+                                        <div className="gareth-sprite" role="img" aria-label="Gareth Keenan character sprite"></div>
                                         <div className="character-name" style={{textAlign: 'center', marginTop: '15px'}}>
                                             Gareth:
                                         </div>
-                                        <div className="character-dialogue" style={{textAlign: 'center', fontStyle: 'italic'}}>
+                                        <div className="character-dialogue" style={{textAlign: 'center', fontStyle: 'italic'}} role="article" aria-label="Gareth's comment">
                                             {extraDialogue}
                                         </div>
                                     </div>
                                 )}
 
                                 <div style={{textAlign: 'center'}}>
-                                    <button className="next-button" onClick={handleNext}>
+                                    <button
+                                        className="next-button"
+                                        onClick={handleNext}
+                                        aria-label={currentCriterionIndex < criteria.length - 1 ? 'Continue to next criterion' : 'Complete evaluation and return to section selection'}
+                                    >
                                         {currentCriterionIndex < criteria.length - 1 ? 'NEXT CRITERION' : 'COMPLETE EVALUATION'}
                                     </button>
                                 </div>
@@ -1113,35 +1163,61 @@
             const [isExpanded, setIsExpanded] = useState(false);
 
             return (
-                <div className="completed-evaluation">
+                <div className="completed-evaluation" role="article" aria-labelledby={`eval-${evaluation.section.id}`}>
                     <div
                         className="evaluation-header-bar"
                         onClick={() => setIsExpanded(!isExpanded)}
+                        role="button"
+                        tabIndex={0}
+                        aria-expanded={isExpanded}
+                        aria-controls={`eval-details-${evaluation.section.id}`}
+                        aria-label={`${isExpanded ? 'Collapse' : 'Expand'} evaluation for ${evaluation.section.name}`}
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                setIsExpanded(!isExpanded);
+                            }
+                        }}
                     >
-                        <div className="evaluation-title">
+                        <div className="evaluation-title" id={`eval-${evaluation.section.id}`}>
                             ✓ {evaluation.section.name}
                         </div>
-                        <div className="evaluation-toggle">
+                        <div className="evaluation-toggle" aria-hidden="true">
                             {isExpanded ? '▼' : '▶'}
                         </div>
                     </div>
-                    <div className={`evaluation-details ${isExpanded ? '' : 'collapsed'}`}>
-                        <div style={{
-                            background: '#2b2b2b',
-                            padding: '15px',
-                            marginBottom: '15px',
-                            borderLeft: '4px solid #8b8b8b',
-                            fontStyle: 'italic',
-                            fontSize: '0.95rem',
-                            maxHeight: '150px',
-                            overflow: 'auto'
-                        }}>
+                    <div
+                        id={`eval-details-${evaluation.section.id}`}
+                        className={`evaluation-details ${isExpanded ? '' : 'collapsed'}`}
+                        aria-hidden={!isExpanded}
+                    >
+                        <div
+                            style={{
+                                background: '#2b2b2b',
+                                padding: '15px',
+                                marginBottom: '15px',
+                                borderLeft: '4px solid #8b8b8b',
+                                fontStyle: 'italic',
+                                fontSize: '0.95rem',
+                                maxHeight: '150px',
+                                overflow: 'auto'
+                            }}
+                            role="article"
+                            aria-label="Your submitted text"
+                        >
                             {evaluation.text}
                         </div>
                         {evaluation.results.map((result, index) => (
-                            <div key={index} className="criterion-result">
-                                <h4>{result.criterionName}</h4>
-                                <div className="criterion-score">Score: {result.score}/10</div>
+                            <div
+                                key={index}
+                                className="criterion-result"
+                                role="article"
+                                aria-labelledby={`result-${evaluation.section.id}-${index}`}
+                            >
+                                <h4 id={`result-${evaluation.section.id}-${index}`}>{result.criterionName}</h4>
+                                <div className="criterion-score" aria-label={`Score: ${result.score} out of 10`}>
+                                    Score: {result.score}/10
+                                </div>
                                 <p>{result.feedback}</p>
                             </div>
                         ))}
