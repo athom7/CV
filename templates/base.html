@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Job Tracker{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('dashboard') }}" class="logo">📋 Job Tracker</a>
+        <a href="{{ url_for('add_application') }}" class="btn btn-primary">+ Add Application</a>
+    </nav>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script>
+        // Quick status update function
+        async function updateStatus(id, newStatus) {
+            try {
+                const response = await fetch(`/update-status/${id}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: newStatus })
+                });
+
+                if (response.ok) {
+                    location.reload();
+                }
+            } catch (error) {
+                console.error('Failed to update status:', error);
+            }
+        }
+
+        // Confirm delete
+        function confirmDelete(event, company) {
+            if (!confirm(`Delete application to ${company}?`)) {
+                event.preventDefault();
+            }
+        }
+    </script>
+</body>
+</html>
