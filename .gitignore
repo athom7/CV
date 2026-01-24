@@ -1,0 +1,15 @@
+# Database
+applications.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+venv/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp

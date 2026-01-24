@@ -1,35 +1,50 @@
-# The Brent Companion
+# Job Application Tracker
 
-A web-based job application quality checker inspired by David Brent from The Office UK.
+A simple, satisfying web app to track your job search progress.
 
-## What is this?
+## Features
 
-The Brent Companion helps you maintain focus and quality while writing job applications by providing humorous feedback based on established best practices. You write in Microsoft Word, paste sections into the web app for self-evaluation, and receive character-driven commentary that makes quality-checking actually enjoyable.
+- **Manual entry form** for job applications with:
+  - Company name
+  - Role title
+  - Application date
+  - Job post date
+  - Job URL
+  - Status tracking (Applied → Responded/Ghosted → Interview → Offer/Rejected)
+  - Notes
 
-## How to use
+- **Dashboard view** showing:
+  - All applications in a clean table
+  - Filter by status
+  - Quick stats: total applied, response rate, applications this week
 
-1. Open `index.html` in your web browser
-2. Write your job application in Microsoft Word
-3. Paste sections (like your motivation paragraph or STAR examples) into the companion
-4. Self-evaluate against five key criteria
-5. Receive feedback from David Brent
-6. Return to Word and revise based on insights
+## Tech Stack
 
-## Research Foundation
+- Python/Flask
+- SQLite database
+- Vanilla HTML/CSS (no framework)
 
-Based on Ballisager's Rekrutteringsanalyse 2025 and djøf guidance, focusing on:
-- Motivation specificity (63% of employers' top advice)
-- Job ad matching
-- Employer value focus
-- Concrete measurable results
-- Conciseness (70% prefer one page)
+## Getting Started
 
-## Development Status
+1. Install dependencies:
+   ```bash
+   pip install flask
+   ```
 
-**Phase 1 (Current):** MVP with core evaluation loop and David Brent dialogue
+2. Run the app:
+   ```bash
+   python app.py
+   ```
 
-**Future Phases:** See BACKLOG.md for planned enhancements
+3. Open http://localhost:5000 in your browser
 
-## Technical Stack
+## Usage
 
-Single HTML file with embedded CSS and JavaScript (React). Pixel art aesthetic.
+- Click **"+ Add Application"** to log a new job application
+- Use the **status dropdown** in each row to quickly update status
+- **Filter** by status using the chips at the top
+- **Edit** or **Delete** applications as needed
+
+## Database
+
+The SQLite database (`applications.db`) is created automatically on first run.
