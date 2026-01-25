@@ -1,6 +1,6 @@
 # Job Application Tracker
 
-A simple, satisfying web app to track your job search progress.
+A simple, satisfying web app to track your job search progress. Pure frontend - no server required.
 
 ## Features
 
@@ -20,23 +20,15 @@ A simple, satisfying web app to track your job search progress.
 
 ## Tech Stack
 
-- Python/Flask
-- SQLite database
-- Vanilla HTML/CSS (no framework)
+- Pure HTML/CSS/JavaScript
+- Browser localStorage for data persistence
+- No dependencies, no build step
 
 ## Getting Started
 
-1. Install dependencies:
-   ```bash
-   pip install flask
-   ```
+Just open `index.html` in your browser. That's it.
 
-2. Run the app:
-   ```bash
-   python app.py
-   ```
-
-3. Open http://localhost:5000 in your browser
+Or deploy to any static hosting (Netlify, GitHub Pages, Vercel, etc.).
 
 ## Usage
 
@@ -45,6 +37,11 @@ A simple, satisfying web app to track your job search progress.
 - **Filter** by status using the chips at the top
 - **Edit** or **Delete** applications as needed
 
-## Database
+## Data Storage
 
-The SQLite database (`applications.db`) is created automatically on first run.
+All data is stored in your browser's localStorage. Data persists across sessions but is local to your browser/device.
+
+To export your data, open browser DevTools → Console and run:
+```javascript
+copy(localStorage.getItem('jobApplications'))
+```
