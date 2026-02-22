@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Art Sprites - The Brent Companion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #f0f0f0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffd700;
+            font-size: 2.5rem;
+            text-shadow: 3px 3px 0 #000;
+            margin-bottom: 20px;
+        }
+
+        .intro {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #f0f0f0;
+            margin-bottom: 50px;
+        }
+
+        .sprite-showcase {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .sprite-card {
+            background: #3a3a3a;
+            border: 4px solid #8b8b8b;
+            padding: 30px;
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .sprite-card h2 {
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .sprite-display {
+            background: #2b2b2b;
+            padding: 40px;
+            border: 2px solid #5a5a5a;
+            display: inline-block;
+        }
+
+        /* Pixel art base */
+        .pixel {
+            width: 4px;
+            height: 4px;
+            display: inline-block;
+        }
+
+        .pixel-sprite {
+            display: inline-block;
+            transform-origin: center;
+        }
+
+        /* David Brent - 16x16 pixel sprite */
+        .brent-pixel {
+            width: 8px;
+            height: 8px;
+            background: #2b2b2b;
+            box-shadow:
+                /* Row 1 - Top of head */
+                0px 0px 0 0px transparent,
+                8px 0px 0 0px #8b4513,
+                16px 0px 0 0px #8b4513,
+                24px 0px 0 0px #8b4513,
+                32px 0px 0 0px #8b4513,
+                40px 0px 0 0px #8b4513,
+                48px 0px 0 0px #8b4513,
+                /* Row 2 */
+                0px 8px 0 0px #8b4513,
+                8px 8px 0 0px #8b4513,
+                16px 8px 0 0px #8b4513,
+                24px 8px 0 0px #8b4513,
+                32px 8px 0 0px #8b4513,
+                40px 8px 0 0px #8b4513,
+                48px 8px 0 0px #8b4513,
+                56px 8px 0 0px #8b4513,
+                /* Row 3 - Forehead */
+                0px 16px 0 0px #8b4513,
+                8px 16px 0 0px #f4c2a5,
+                16px 16px 0 0px #f4c2a5,
+                24px 16px 0 0px #f4c2a5,
+                32px 16px 0 0px #f4c2a5,
+                40px 16px 0 0px #f4c2a5,
+                48px 16px 0 0px #f4c2a5,
+                56px 16px 0 0px #8b4513,
+                /* Row 4 - Eyes */
+                0px 24px 0 0px #8b4513,
+                8px 24px 0 0px #f4c2a5,
+                16px 24px 0 0px #000,
+                24px 24px 0 0px #f4c2a5,
+                32px 24px 0 0px #f4c2a5,
+                40px 24px 0 0px #000,
+                48px 24px 0 0px #f4c2a5,
+                56px 24px 0 0px #8b4513,
+                /* Row 5 - Nose */
+                8px 32px 0 0px #f4c2a5,
+                16px 32px 0 0px #f4c2a5,
+                24px 32px 0 0px #d4a574,
+                32px 32px 0 0px #d4a574,
+                40px 32px 0 0px #f4c2a5,
+                48px 32px 0 0px #f4c2a5,
+                /* Row 6 - Mouth */
+                8px 40px 0 0px #f4c2a5,
+                16px 40px 0 0px #8b4513,
+                24px 40px 0 0px #8b4513,
+                32px 40px 0 0px #8b4513,
+                40px 40px 0 0px #8b4513,
+                48px 40px 0 0px #f4c2a5,
+                /* Row 7 - Chin */
+                8px 48px 0 0px #f4c2a5,
+                16px 48px 0 0px #f4c2a5,
+                24px 48px 0 0px #f4c2a5,
+                32px 48px 0 0px #f4c2a5,
+                40px 48px 0 0px #f4c2a5,
+                48px 48px 0 0px #f4c2a5,
+                /* Row 8 - Neck */
+                16px 56px 0 0px #f4c2a5,
+                24px 56px 0 0px #f4c2a5,
+                32px 56px 0 0px #f4c2a5,
+                40px 56px 0 0px #f4c2a5,
+                /* Row 9 - Collar/Tie top */
+                8px 64px 0 0px #ffffff,
+                16px 64px 0 0px #ffffff,
+                24px 64px 0 0px #8b0000,
+                32px 64px 0 0px #8b0000,
+                40px 64px 0 0px #ffffff,
+                48px 64px 0 0px #ffffff,
+                /* Row 10 - Shirt/Tie */
+                0px 72px 0 0px #ffffff,
+                8px 72px 0 0px #ffffff,
+                16px 72px 0 0px #8b0000,
+                24px 72px 0 0px #8b0000,
+                32px 72px 0 0px #8b0000,
+                40px 72px 0 0px #ffffff,
+                48px 72px 0 0px #ffffff,
+                56px 72px 0 0px #ffffff,
+                /* Row 11 - Body */
+                0px 80px 0 0px #4a4a4a,
+                8px 80px 0 0px #4a4a4a,
+                16px 80px 0 0px #8b0000,
+                24px 80px 0 0px #8b0000,
+                32px 80px 0 0px #8b0000,
+                40px 80px 0 0px #4a4a4a,
+                48px 80px 0 0px #4a4a4a,
+                56px 80px 0 0px #4a4a4a,
+                /* Row 12 - Body */
+                0px 88px 0 0px #4a4a4a,
+                8px 88px 0 0px #4a4a4a,
+                16px 88px 0 0px #4a4a4a,
+                24px 88px 0 0px #8b0000,
+                32px 88px 0 0px #4a4a4a,
+                40px 88px 0 0px #4a4a4a,
+                48px 88px 0 0px #4a4a4a,
+                56px 88px 0 0px #4a4a4a,
+                /* Row 13 - Arms */
+                0px 96px 0 0px #f4c2a5,
+                8px 96px 0 0px #4a4a4a,
+                16px 96px 0 0px #4a4a4a,
+                24px 96px 0 0px #4a4a4a,
+                32px 96px 0 0px #4a4a4a,
+                40px 96px 0 0px #4a4a4a,
+                48px 96px 0 0px #4a4a4a,
+                56px 96px 0 0px #f4c2a5,
+                /* Row 14 - Hands/Waist */
+                0px 104px 0 0px #f4c2a5,
+                8px 104px 0 0px #f4c2a5,
+                16px 104px 0 0px #333333,
+                24px 104px 0 0px #333333,
+                32px 104px 0 0px #333333,
+                40px 104px 0 0px #333333,
+                48px 104px 0 0px #f4c2a5,
+                56px 104px 0 0px #f4c2a5,
+                /* Row 15 - Legs */
+                16px 112px 0 0px #333333,
+                24px 112px 0 0px #333333,
+                32px 112px 0 0px #333333,
+                40px 112px 0 0px #333333,
+                /* Row 16 - Feet */
+                16px 120px 0 0px #000,
+                24px 120px 0 0px #000,
+                32px 120px 0 0px #000,
+                40px 120px 0 0px #000;
+        }
+
+        /* Tim - 16x16 pixel sprite */
+        .tim-pixel {
+            width: 8px;
+            height: 8px;
+            background: #2b2b2b;
+            box-shadow:
+                /* Row 1 - Hair top */
+                8px 0px 0 0px #654321,
+                16px 0px 0 0px #654321,
+                24px 0px 0 0px #654321,
+                32px 0px 0 0px #654321,
+                40px 0px 0 0px #654321,
+                48px 0px 0 0px #654321,
+                /* Row 2 - Hair */
+                0px 8px 0 0px #654321,
+                8px 8px 0 0px #654321,
+                16px 8px 0 0px #654321,
+                24px 8px 0 0px #654321,
+                32px 8px 0 0px #654321,
+                40px 8px 0 0px #654321,
+                48px 8px 0 0px #654321,
+                56px 8px 0 0px #654321,
+                /* Row 3 - Forehead */
+                0px 16px 0 0px #654321,
+                8px 16px 0 0px #f4c2a5,
+                16px 16px 0 0px #f4c2a5,
+                24px 16px 0 0px #f4c2a5,
+                32px 16px 0 0px #f4c2a5,
+                40px 16px 0 0px #f4c2a5,
+                48px 16px 0 0px #f4c2a5,
+                56px 16px 0 0px #654321,
+                /* Row 4 - Eyes */
+                0px 24px 0 0px #654321,
+                8px 24px 0 0px #f4c2a5,
+                16px 24px 0 0px #000,
+                24px 24px 0 0px #f4c2a5,
+                32px 24px 0 0px #f4c2a5,
+                40px 24px 0 0px #000,
+                48px 24px 0 0px #f4c2a5,
+                56px 24px 0 0px #654321,
+                /* Row 5 - Nose */
+                8px 32px 0 0px #f4c2a5,
+                16px 32px 0 0px #f4c2a5,
+                24px 32px 0 0px #d4a574,
+                32px 32px 0 0px #d4a574,
+                40px 32px 0 0px #f4c2a5,
+                48px 32px 0 0px #f4c2a5,
+                /* Row 6 - Mouth (slight smirk) */
+                8px 40px 0 0px #f4c2a5,
+                16px 40px 0 0px #f4c2a5,
+                24px 40px 0 0px #8b4513,
+                32px 40px 0 0px #8b4513,
+                40px 40px 0 0px #8b4513,
+                48px 40px 0 0px #f4c2a5,
+                /* Row 7 - Chin */
+                8px 48px 0 0px #f4c2a5,
+                16px 48px 0 0px #f4c2a5,
+                24px 48px 0 0px #f4c2a5,
+                32px 48px 0 0px #f4c2a5,
+                40px 48px 0 0px #f4c2a5,
+                48px 48px 0 0px #f4c2a5,
+                /* Row 8 - Neck */
+                16px 56px 0 0px #f4c2a5,
+                24px 56px 0 0px #f4c2a5,
+                32px 56px 0 0px #f4c2a5,
+                40px 56px 0 0px #f4c2a5,
+                /* Row 9 - Collar */
+                8px 64px 0 0px #4169e1,
+                16px 64px 0 0px #4169e1,
+                24px 64px 0 0px #4169e1,
+                32px 64px 0 0px #4169e1,
+                40px 64px 0 0px #4169e1,
+                48px 64px 0 0px #4169e1,
+                /* Row 10 - Shirt */
+                0px 72px 0 0px #4169e1,
+                8px 72px 0 0px #4169e1,
+                16px 72px 0 0px #4169e1,
+                24px 72px 0 0px #4169e1,
+                32px 72px 0 0px #4169e1,
+                40px 72px 0 0px #4169e1,
+                48px 72px 0 0px #4169e1,
+                56px 72px 0 0px #4169e1,
+                /* Row 11 - Body */
+                0px 80px 0 0px #2c5282,
+                8px 80px 0 0px #4169e1,
+                16px 80px 0 0px #4169e1,
+                24px 80px 0 0px #4169e1,
+                32px 80px 0 0px #4169e1,
+                40px 80px 0 0px #4169e1,
+                48px 80px 0 0px #4169e1,
+                56px 80px 0 0px #2c5282,
+                /* Row 12 - Body */
+                0px 88px 0 0px #2c5282,
+                8px 88px 0 0px #4169e1,
+                16px 88px 0 0px #4169e1,
+                24px 88px 0 0px #4169e1,
+                32px 88px 0 0px #4169e1,
+                40px 88px 0 0px #4169e1,
+                48px 88px 0 0px #4169e1,
+                56px 88px 0 0px #2c5282,
+                /* Row 13 - Arms */
+                0px 96px 0 0px #f4c2a5,
+                8px 96px 0 0px #2c5282,
+                16px 96px 0 0px #2c5282,
+                24px 96px 0 0px #2c5282,
+                32px 96px 0 0px #2c5282,
+                40px 96px 0 0px #2c5282,
+                48px 96px 0 0px #2c5282,
+                56px 96px 0 0px #f4c2a5,
+                /* Row 14 - Hands/Waist */
+                0px 104px 0 0px #f4c2a5,
+                8px 104px 0 0px #f4c2a5,
+                16px 104px 0 0px #333333,
+                24px 104px 0 0px #333333,
+                32px 104px 0 0px #333333,
+                40px 104px 0 0px #333333,
+                48px 104px 0 0px #f4c2a5,
+                56px 104px 0 0px #f4c2a5,
+                /* Row 15 - Legs */
+                16px 112px 0 0px #333333,
+                24px 112px 0 0px #333333,
+                32px 112px 0 0px #333333,
+                40px 112px 0 0px #333333,
+                /* Row 16 - Feet */
+                16px 120px 0 0px #000,
+                24px 120px 0 0px #000,
+                32px 120px 0 0px #000,
+                40px 120px 0 0px #000;
+        }
+
+        /* Gareth - 16x16 pixel sprite */
+        .gareth-pixel {
+            width: 8px;
+            height: 8px;
+            background: #2b2b2b;
+            box-shadow:
+                /* Row 1 - Short military hair */
+                8px 0px 0 0px #c9a86a,
+                16px 0px 0 0px #c9a86a,
+                24px 0px 0 0px #c9a86a,
+                32px 0px 0 0px #c9a86a,
+                40px 0px 0 0px #c9a86a,
+                48px 0px 0 0px #c9a86a,
+                /* Row 2 - Hair */
+                0px 8px 0 0px #c9a86a,
+                8px 8px 0 0px #c9a86a,
+                16px 8px 0 0px #c9a86a,
+                24px 8px 0 0px #c9a86a,
+                32px 8px 0 0px #c9a86a,
+                40px 8px 0 0px #c9a86a,
+                48px 8px 0 0px #c9a86a,
+                56px 8px 0 0px #c9a86a,
+                /* Row 3 - Forehead */
+                0px 16px 0 0px #c9a86a,
+                8px 16px 0 0px #f4c2a5,
+                16px 16px 0 0px #f4c2a5,
+                24px 16px 0 0px #f4c2a5,
+                32px 16px 0 0px #f4c2a5,
+                40px 16px 0 0px #f4c2a5,
+                48px 16px 0 0px #f4c2a5,
+                56px 16px 0 0px #c9a86a,
+                /* Row 4 - Eyes (intense) */
+                0px 24px 0 0px #c9a86a,
+                8px 24px 0 0px #f4c2a5,
+                16px 24px 0 0px #000,
+                24px 24px 0 0px #000,
+                32px 24px 0 0px #000,
+                40px 24px 0 0px #000,
+                48px 24px 0 0px #f4c2a5,
+                56px 24px 0 0px #c9a86a,
+                /* Row 5 - Nose */
+                8px 32px 0 0px #f4c2a5,
+                16px 32px 0 0px #f4c2a5,
+                24px 32px 0 0px #d4a574,
+                32px 32px 0 0px #d4a574,
+                40px 32px 0 0px #f4c2a5,
+                48px 32px 0 0px #f4c2a5,
+                /* Row 6 - Mouth (stern) */
+                8px 40px 0 0px #f4c2a5,
+                16px 40px 0 0px #8b4513,
+                24px 40px 0 0px #8b4513,
+                32px 40px 0 0px #8b4513,
+                40px 40px 0 0px #8b4513,
+                48px 40px 0 0px #f4c2a5,
+                /* Row 7 - Chin */
+                8px 48px 0 0px #f4c2a5,
+                16px 48px 0 0px #f4c2a5,
+                24px 48px 0 0px #f4c2a5,
+                32px 48px 0 0px #f4c2a5,
+                40px 48px 0 0px #f4c2a5,
+                48px 48px 0 0px #f4c2a5,
+                /* Row 8 - Neck */
+                16px 56px 0 0px #f4c2a5,
+                24px 56px 0 0px #f4c2a5,
+                32px 56px 0 0px #f4c2a5,
+                40px 56px 0 0px #f4c2a5,
+                /* Row 9 - Collar (white shirt) */
+                8px 64px 0 0px #ffffff,
+                16px 64px 0 0px #ffffff,
+                24px 64px 0 0px #ffffff,
+                32px 64px 0 0px #ffffff,
+                40px 64px 0 0px #ffffff,
+                48px 64px 0 0px #ffffff,
+                /* Row 10 - Shirt */
+                0px 72px 0 0px #ffffff,
+                8px 72px 0 0px #ffffff,
+                16px 72px 0 0px #ffffff,
+                24px 72px 0 0px #ffffff,
+                32px 72px 0 0px #ffffff,
+                40px 72px 0 0px #ffffff,
+                48px 72px 0 0px #ffffff,
+                56px 72px 0 0px #ffffff,
+                /* Row 11 - Body/Vest */
+                0px 80px 0 0px #4a5568,
+                8px 80px 0 0px #4a5568,
+                16px 80px 0 0px #ffffff,
+                24px 80px 0 0px #ffffff,
+                32px 80px 0 0px #ffffff,
+                40px 80px 0 0px #ffffff,
+                48px 80px 0 0px #4a5568,
+                56px 80px 0 0px #4a5568,
+                /* Row 12 - Body */
+                0px 88px 0 0px #4a5568,
+                8px 88px 0 0px #4a5568,
+                16px 88px 0 0px #4a5568,
+                24px 88px 0 0px #4a5568,
+                32px 88px 0 0px #4a5568,
+                40px 88px 0 0px #4a5568,
+                48px 88px 0 0px #4a5568,
+                56px 88px 0 0px #4a5568,
+                /* Row 13 - Arms */
+                0px 96px 0 0px #f4c2a5,
+                8px 96px 0 0px #4a5568,
+                16px 96px 0 0px #4a5568,
+                24px 96px 0 0px #4a5568,
+                32px 96px 0 0px #4a5568,
+                40px 96px 0 0px #4a5568,
+                48px 96px 0 0px #4a5568,
+                56px 96px 0 0px #f4c2a5,
+                /* Row 14 - Hands/Waist (military posture) */
+                0px 104px 0 0px #f4c2a5,
+                8px 104px 0 0px #f4c2a5,
+                16px 104px 0 0px #333333,
+                24px 104px 0 0px #333333,
+                32px 104px 0 0px #333333,
+                40px 104px 0 0px #333333,
+                48px 104px 0 0px #f4c2a5,
+                56px 104px 0 0px #f4c2a5,
+                /* Row 15 - Legs */
+                16px 112px 0 0px #333333,
+                24px 112px 0 0px #333333,
+                32px 112px 0 0px #333333,
+                40px 112px 0 0px #333333,
+                /* Row 16 - Feet */
+                16px 120px 0 0px #000,
+                24px 120px 0 0px #000,
+                32px 120px 0 0px #000,
+                40px 120px 0 0px #000;
+        }
+
+        /* Animations */
+        .brent-idle {
+            animation: brent-bob 2s ease-in-out infinite;
+        }
+
+        @keyframes brent-bob {
+            0%, 100% { transform: translateY(0) scale(2); }
+            50% { transform: translateY(-8px) scale(2); }
+        }
+
+        .tim-look {
+            animation: tim-skeptical 3s ease-in-out infinite;
+        }
+
+        @keyframes tim-skeptical {
+            0%, 20%, 100% { transform: scale(2); }
+            40%, 80% { transform: scale(2.1) translateX(-4px); }
+        }
+
+        .gareth-eager {
+            animation: gareth-bounce 1.5s ease-in-out infinite;
+        }
+
+        @keyframes gareth-bounce {
+            0%, 100% { transform: translateY(0) scale(2); }
+            25% { transform: translateY(-12px) scale(2); }
+            50% { transform: translateY(-6px) scale(2); }
+            75% { transform: translateY(-10px) scale(2); }
+        }
+
+        .description {
+            margin-top: 20px;
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .comparison {
+            background: #3a3a3a;
+            border: 4px solid #ffd700;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .comparison h2 {
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .comparison p {
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Pixel Art Sprites</h1>
+        <p class="intro">
+            Proper retro-style pixel art characters for The Brent Companion
+        </p>
+
+        <div class="sprite-showcase">
+            <div class="sprite-card">
+                <h2>David Brent</h2>
+                <div class="sprite-display">
+                    <div class="pixel-sprite brent-pixel brent-idle"></div>
+                </div>
+                <p class="description">
+                    16x16 pixel sprite featuring Brent's receding hairline, shirt and tie,
+                    and characteristic awkward posture. Animated with gentle idle bob.
+                </p>
+            </div>
+
+            <div class="sprite-card">
+                <h2>Tim Canterbury</h2>
+                <div class="sprite-display">
+                    <div class="pixel-sprite tim-pixel tim-look"></div>
+                </div>
+                <p class="description">
+                    16x16 pixel sprite with full hair, blue shirt, and slight smirk.
+                    Animation mimics Tim's "look to camera" skeptical expression.
+                </p>
+            </div>
+
+            <div class="sprite-card">
+                <h2>Gareth Keenan</h2>
+                <div class="sprite-display">
+                    <div class="pixel-sprite gareth-pixel gareth-eager"></div>
+                </div>
+                <p class="description">
+                    16x16 pixel sprite with short military-style hair, white shirt and vest.
+                    Enthusiastic bouncing animation showing his eager-to-please personality.
+                </p>
+            </div>
+        </div>
+
+        <div class="comparison">
+            <h2>Sprite Design Notes</h2>
+            <p><strong>Brent:</strong> Balding pattern, grey suit, red tie, slightly wider build to suggest his sedentary management role</p>
+            <p><strong>Tim:</strong> Full brown hair, blue casual shirt, slimmer build, more "normal" appearance</p>
+            <p><strong>Gareth:</strong> Blonde/light brown short hair, white shirt with grey vest, stern/intense facial expression</p>
+            <p style="margin-top: 20px;"><strong>Technical:</strong> Each sprite is 16x16 pixels, created using CSS box-shadow technique for crisp pixel art that scales perfectly</p>
+        </div>
+    </div>
+</body>
+</html>
